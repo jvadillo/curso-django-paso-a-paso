@@ -381,11 +381,62 @@ Crea las plantillas que definan la estructura de las páginas HTML resultantes:
 
 
 
-### PASO 11: Crea tu primer proyecto
+### PASO 11: La herencia en plantillas
 
-You can rename the current file by clicking the file name in the navigation bar or by clicking the **Rename** button in the file explorer.
+Django permite crear una plantilla base que contenga el “esqueleto” con todos los elementos comunes y definir bloques que puedan sobreescritos por las plantillas que la hereden. 
+
+Crea una plantilla base:
+```html
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="style.css">
+        <title>{% block titulo %}Gestor de Empleados {% endblock %}</title>
+    </head>
+    <body>
+        <div id="content">
+	     <h1>Gestor de Empeleados</h1>
+            {% block contenido %}{% endblock %}
+        </div>
+    </body>
+</html>
+```
 
 
-### PASO 12: Crea tu primer proyecto
+Creas las plantillas específicas que hereden de la plantilla base:
 
-You can rename the current file by clicking the file name in the navigation bar or by clicking the **Rename** button in the file explorer.
+```python
+#index.html:
+{% extends "base.html" %}
+
+{% block titulo %}Listado de departamentos{% endblock %}
+
+{% block contenido %}
+<h2>Listado de departamentos</h2>
+{% if lista_departamentos %}
+	<ul>
+	{% for d in lista_departamentos %}
+		<li>
+		    <a href="/polls/{{ d.id }}/">{{ d.nombre}}</a>
+		</li>
+	{% endfor %}
+	</ul>
+{% else %}
+<p>No hay departamentos creados.</p>
+{% endif %}
+{% endblock %}
+
+```
+
+### PASO 12: Actualizar las URLs
+
+En lugar de utilizar la ruta de la URL, podemos utilizar el nombre que le hemos dado en el mapeo definido en `urls.py`
+
+Antes:
+```html
+<li><a href="/miApp/{{ empresa.id }}/">{{ empresa.nombre }}</a></li>
+```
+Ahora
+```html
+<li><a href="{% url ‘detalle’ empresa.id%}">{{ empresa.nombre}}</a></li>
+```
