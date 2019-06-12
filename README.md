@@ -323,20 +323,20 @@ from .models import Departamento, Empleado
 def index(request):
 	departamentos = get_list_or_404(Departamento.objects.order_by('nombre'))
 	context = {'lista_departamentos': departamentos }
-	return render(request, 'app-curso-django/index.html', context)
+	return render(request, 'index.html', context)
 
 #devuelve los datos de un departamento
 def detail(request, departamento_id):
 	departamento = get_object_or_404(Departamento, pk=departamento_id)
 	context = {'departamento': departamento }
-	return render(request, 'app-curso-django/detail.html', context)
+	return render(request, 'detail.html', context)
 
 #devuelve los empelados de un departamento
 def empleados(request, departamento_id):
 	departamento = get_object_or_404(Departamento, pk=departamento_id)
 	empleados =  departamento.empelado_set.all()
 	context = {'departamento': departamento, 'empelados' : empelados }
-	return render(request, 'app-curso-django/empleados.html', context)
+	return render(request, 'empleados.html', context)
 ```
 
 Crea las plantillas que definan la estructura de las páginas HTML resultantes:
@@ -350,7 +350,7 @@ Crea las plantillas que definan la estructura de las páginas HTML resultantes:
 	<ul>
 	{% for d in lista_departamentos %}
 		<li>
-		    <a href="/polls/{{ d.id }}/">{{ d.nombre}}</a>
+		    <a href="/app-curso-django/{{ d.id }}/">{{ d.nombre}}</a>
 		</li>
 	{% endfor %}
 	</ul>
