@@ -471,9 +471,9 @@ En lugar de utilizar la ruta de la URL, podemos utilizar el nombre que le hemos 
 
 Antes:
 ```html
-<li><a href="/miApp/{{ empresa.id }}/">{{ empresa.nombre }}</a></li>
+<li><a href="/miApp/{{ empresa.id }}/">{{ d.nombre }}</a></li>
 ```
 Ahora
 ```html
-<li><a href="{% url ‘detalle’ empresa.id%}">{{ empresa.nombre}}</a></li>
+<li><a href="{% url 'detail' d.id %}">{{ d.nombre}}</a></li>
 ```
