@@ -229,3 +229,163 @@ Iniciar el servidor y entrar
    ```
     
 Entrar en la aplicación [http://127.0.0.1:8000/admin](http://127.0.0.1:8000/admin)
+
+### PASO 8: Crea las vistas y urls para interactuar con el modelo
+
+Creamos las vistas correspondientes a las siguientes URLs:
+| URL | Descripción de la vista |
+|--|--|
+|/app-curso-django/  | Muestra todos los departamentos  |
+|/app-curso-django/<:id>  | Muestra los detalles de un departamento a partir del ID indicado  |
+|/app-curso-django/<:id>/empleados  | Muestra los empleados del departamento con el ID indicado  |
+
+Creamos las vistas (cada vista estará definida por una función):
+```python
+from django.shortcuts import render
+from .models import Departamento, Empleado
+
+#devuelve el listado de empresas
+def index(request):
+	departamentos = Departamento.objects.order_by('nombre')
+	output = ', '.join([d.nombre for d in departamentos])
+	return HttpResponse(output)
+
+#devuelve los datos de un departamento
+def detail(request, departamento_id):
+	departamento = Departamento.objects.get(pk=departamento_id)
+	output = ', '.join([departamento.id, departamento.nombre, departamento.telefono])
+	return HttpResponse(output)
+
+#devuelve los empelados de un departamento
+def empleados(request, departamento_id):
+	departamento = Departamento.objects.get(pk=departamento_id)
+	output = ', '.join([e.nombre for e in departamento.empelado_set.all()])
+	return HttpResponse(output)
+```
+
+### PASO 9: Mejora las vistas controlando errores 404
+
+Utiliza el método `get_object_or_404` para controlar los casos en los que el registro de la petición no exista:
+
+```python
+from .models import Departamento, Empleado
+
+#devuelve el listado de empresas
+def index(request):
+	departamentos = get_list_or_404(Departamento.objects.order_by('nombre'))
+	output = ', '.join([d.nombre for d in departamentos])
+	return HttpResponse(output)
+
+#devuelve los datos de un departamento
+def detail(request, departamento_id):
+	departamento = get_object_or_404(Departamento, pk=departamento_id)
+	output = ', '.join([departamento.id, departamento.nombre, departamento.telefono])
+	return HttpResponse(output)
+
+#devuelve los empelados de un departamento
+def empleados(request, departamento_id):
+	departamento = get_object_or_404(Departamento, pk=departamento_id)
+	output = ', '.join([e.nombre for e in departamento.empelado_set.all()])
+	return HttpResponse(output)
+```
+
+
+### PASO 10: Utiliza plantillas para mostrar la información
+
+Actualiza las vistas creadas en `views.py`:
+
+```python
+from django.shortcuts import render
+from .models import Departamento, Empleado
+
+#devuelve el listado de empresas
+def index(request):
+	departamentos = get_list_or_404(Departamento.objects.order_by('nombre'))
+	context = {'lista_departamentos': departamentos }
+	return render(request, 'app-curso-django/index.html', context)
+
+#devuelve los datos de un departamento
+def detail(request, departamento_id):
+	departamento = get_object_or_404(Departamento, pk=departamento_id)
+	context = {'departamento': departamento }
+	return render(request, 'app-curso-django/detail.html', context)
+
+#devuelve los empelados de un departamento
+def empleados(request, departamento_id):
+	departamento = get_object_or_404(Departamento, pk=departamento_id)
+	empleados =  departamento.empelado_set.all()
+	context = {'departamento': departamento, 'empelados' : empelados }
+	return render(request, 'app-curso-django/empleados.html', context)
+```
+
+Crea las plantillas que definan la estructura de las páginas HTML resultantes:
+
+```python
+#index.html:
+<h1>Gestor de Empeleados</h1>
+<h2>Listado de departamentos</h2>
+
+{% if lista_departamentos %}
+	<ul>
+	{% for d in lista_departamentos %}
+		<li>
+		    <a href="/polls/{{ d.id }}/">{{ d.nombre}}</a>
+		</li>
+	{% endfor %}
+	</ul>
+{% else %}
+<p>No hay departamentos creados.</p>
+{% endif %}
+```
+
+
+```python
+#detail.html:
+<h1>Gestor de Empeleados</h1>
+<h2>Datos del departamento</h2>
+
+{% if departamento %}
+    <ul>
+        <li>
+            {{ departamento.nombre}}
+        </li>
+        <li>
+            {{ departamento.telefono}}
+        </li>
+        <li>
+            <a href="/app-curso-django/{{ departamento.id }}/empleados">Ver empleados</a>
+        </li>
+    </ul>
+{% else %}
+    <p>No hay departamentos creados.</p>
+{% endif %}
+```
+
+```python
+#empelados.html:
+<h1>Gestor de Empeleados</h1>
+<h2>Lista de empleados</h2>
+<h3>{{ departamento.nombre }}</h3>
+{% if empelados %}
+	<ul>
+	{% for e in empleados %}
+		<li>
+		    {{ e.nombre}}
+		</li>
+	{% endfor %}
+	</ul>
+{% else %}
+<p>No hay departamentos creados.</p>
+{% endif %}
+```
+
+
+
+### PASO 11: Crea tu primer proyecto
+
+You can rename the current file by clicking the file name in the navigation bar or by clicking the **Rename** button in the file explorer.
+
+
+### PASO 12: Crea tu primer proyecto
+
+You can rename the current file by clicking the file name in the navigation bar or by clicking the **Rename** button in the file explorer.
