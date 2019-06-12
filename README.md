@@ -335,34 +335,42 @@ def detail(request, departamento_id):
 def empleados(request, departamento_id):
 	departamento = get_object_or_404(Departamento, pk=departamento_id)
 	empleados =  departamento.empelado_set.all()
-	context = {'departamento': departamento, 'empelados' : empelados }
+	context = {'departamento': departamento, 'empleados' : empleados }
 	return render(request, 'empleados.html', context)
 ```
 
 Crea las plantillas que definan la estructura de las páginas HTML resultantes:
 
-```python
-#index.html:
-<h1>Gestor de Empeleados</h1>
-<h2>Listado de departamentos</h2>
+Plantilla detail.html:
 
+```python
+{% extends "base.html" %}
+
+{% block titulo %}Listado de departamentos{% endblock %}
+
+{% block contenido %}
+<h2>Listado de departamentos</h2>
 {% if lista_departamentos %}
 	<ul>
 	{% for d in lista_departamentos %}
 		<li>
-		    <a href="/app-curso-django/{{ d.id }}/">{{ d.nombre}}</a>
+		    <a href="/app-curso-django/{{ d.id }}">{{ d.nombre}}</a>
 		</li>
 	{% endfor %}
 	</ul>
 {% else %}
 <p>No hay departamentos creados.</p>
 {% endif %}
+{% endblock %}
 ```
-
+Plantilla detail.html:
 
 ```python
-#detail.html:
-<h1>Gestor de Empeleados</h1>
+{% extends "base.html" %}
+
+{% block titulo %} Detalle de departamento {% endblock %}
+
+{% block contenido %}
 <h2>Datos del departamento</h2>
 
 {% if departamento %}
@@ -374,20 +382,27 @@ Crea las plantillas que definan la estructura de las páginas HTML resultantes:
             {{ departamento.telefono}}
         </li>
         <li>
-            <a href="/app-curso-django/{{ departamento.id }}/empleados">Ver empleados</a>
+            <a href="/app-curso-django/departamento/{{ departamento.id }}/empleados">Ver empleados</a>
         </li>
     </ul>
 {% else %}
     <p>No hay departamentos creados.</p>
 {% endif %}
+
+{% endblock %}
 ```
 
+Plantilla empleados.html:
+
 ```python
-#empelados.html:
-<h1>Gestor de Empeleados</h1>
+{% extends "base.html" %}
+
+{% block titulo %} Empelados del departamento {% endblock %}
+
+{% block contenido %}
 <h2>Lista de empleados</h2>
 <h3>{{ departamento.nombre }}</h3>
-{% if empelados %}
+{% if empleados %}
 	<ul>
 	{% for e in empleados %}
 		<li>
@@ -398,6 +413,7 @@ Crea las plantillas que definan la estructura de las páginas HTML resultantes:
 {% else %}
 <p>No hay departamentos creados.</p>
 {% endif %}
+{% endblock %}
 ```
 
 
