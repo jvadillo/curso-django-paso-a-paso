@@ -54,7 +54,7 @@ Posicionate en el directorio del proyecto `$ cd <outer_project_folder>`
 
 Crea la aplicación ejecutando el siguiente comando:
 
-`python manage startapp app-curso-django`
+`python manage.py startapp app-curso-django`
 
 Dentro del directorio de la aplicación, crear un fichero llamado `urls.py` que utilizaremos para mapear las URLs de nuestra aplicación.
 
