@@ -166,7 +166,7 @@ Accede al intérprete interactivo de Django escribiendo el siguiente comando:
 
 Una vez dentro, ya puedes comenzar a crear y consultar registros.
    ```python
-	>>> from GestorRedesWebApp.models import Departamento, Empleado
+	>>> from djangoapp.models import Departamento, Empleado
 	>>> departamento = Departamento(nombre="Oficina Tecnica", telefono="945010101")
 	>>> departamento .save()
 	# Django le asigna un id.
@@ -175,16 +175,17 @@ Una vez dentro, ya puedes comenzar a crear y consultar registros.
 	
 	# Acceder a sus atributos
 	>>> departamento.nombre
-	Egibide
+	'Oficina Tecnica'
 	
 	>>> Departamento.objects.all()
-	<QuerySet [<Empresa: Empresa object (1)>]>
+	<QuerySet [<Departamento: Departamento object (1)>]>
 	
 	>>> Departamento.objects.filter(nombre__contains='Oficina').count()
 	1
 	
 	# Mostrar los empleados de un departamento.
-	>>> departamento.empleado_set.all()<QuerySet []>
+	>>> departamento.empleado_set.all()
+	<QuerySet []>
 	
 	# Crear empleados.
 	>>> departamento.empleado_set.create(nombre='Mikel Uriarte', fecha_nacimiento='1985-01-23')
@@ -197,10 +198,14 @@ Una vez dentro, ya puedes comenzar a crear y consultar registros.
 	
 	# Es posible acceder desde el hijo a su padre.
 	>>> empleado.departamento
-	[<Empresa: Empresa object (1)>
+	<Departamento: Departamento object (1)>
+	
+	>>> empleado.departamento.nombre
+	'Oficina Tecnica'
 	
 	# También es posible acceder desde el padre a todos sus hijos.
 	>>> departamento.empelado_set.all()
+	<QuerySet [<Empleado: Empleado object (1)>, <Empleado: Empleado object (2)>, <Empleado: Empleado object (3)>]>
 	
 	>>>> departamento.empelado_set.count()
 	3
