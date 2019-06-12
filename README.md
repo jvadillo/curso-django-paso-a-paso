@@ -246,7 +246,8 @@ Creamos las vistas correspondientes a las siguientes URLs:
 
 Creamos las vistas (cada vista estará definida por una función):
 ```python
-from django.shortcuts import render
+from django.http import HttpResponse, Http404
+from django.shortcuts import get_object_or_404, get_list_or_404
 from .models import Departamento, Empleado
 
 #devuelve el listado de empresas
@@ -258,7 +259,7 @@ def index(request):
 #devuelve los datos de un departamento
 def detail(request, departamento_id):
 	departamento = Departamento.objects.get(pk=departamento_id)
-	output = ', '.join([departamento.id, departamento.nombre, departamento.telefono])
+	output = ', '.join([str(departamento.id), departamento.nombre, str(departamento.telefono)])
 	return HttpResponse(output)
 
 #devuelve los empelados de un departamento
@@ -268,12 +269,27 @@ def empleados(request, departamento_id):
 	return HttpResponse(output)
 ```
 
+Creamos las URLs que redirijan las peticiones a las vistas creadas:
+```python
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.index, name='index'),
+    path('<int:departamento_id>/', views.detail, name='detail'),
+    path('departamento/<int:departamento_id>/empleados', views.empleados, name='empleados')
+]
+```
+
 ### PASO 9: Mejora las vistas controlando errores 404
 
 Utiliza el método `get_object_or_404` para controlar los casos en los que el registro de la petición no exista:
 
 ```python
+from django.http import HttpResponse, Http404
+from django.shortcuts import get_object_or_404, get_list_or_404
 from .models import Departamento, Empleado
+
 
 #devuelve el listado de empresas
 def index(request):
@@ -284,13 +300,13 @@ def index(request):
 #devuelve los datos de un departamento
 def detail(request, departamento_id):
 	departamento = get_object_or_404(Departamento, pk=departamento_id)
-	output = ', '.join([departamento.id, departamento.nombre, departamento.telefono])
+	output = ' ---- '.join([str(departamento.id), departamento.nombre, str(departamento.telefono)])
 	return HttpResponse(output)
 
 #devuelve los empelados de un departamento
 def empleados(request, departamento_id):
 	departamento = get_object_or_404(Departamento, pk=departamento_id)
-	output = ', '.join([e.nombre for e in departamento.empelado_set.all()])
+	output = ', '.join([e.nombre for e in departamento.empleado_set.all()])
 	return HttpResponse(output)
 ```
 
