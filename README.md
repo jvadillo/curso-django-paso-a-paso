@@ -7,6 +7,20 @@ Este es un curso diseñado para aprender desarrollar aplicaciones web con **Djan
 El curso requiere unos conocimientos básicos de **Python, HTML y CSS**.
 Del mismo modo partirá de la base de que tienes **Python, PIP y virtualenvwrapper** instalado en el sistema.
 
+
+## Material
+
+En este repositorio puedes encontrar todas las presentaciones para ir aprendiendo Django desde cero y paso a paso. Por otro lado en esta misma página también puedes encontrar una guía resumen con todos los pasos necesarios para crear una aplicación web con Django.
+### Slides
+
+1.  Introducción y fundamentos básicos ([slides](https://github.com/jvadillo/curso-django-paso-a-paso/blob/master/slides/01-Django-Introduccion.pdf))
+2.  Crea tu primer proyecto en Django ([slides](https://github.com/jvadillo/curso-django-paso-a-paso/blob/master/slides/02-Django-Crear%20proyecto.pdf))
+3.  Crea tu primera aplicación en django ([slides](https://github.com/jvadillo/curso-django-paso-a-paso/blob/master/slides/03-Django-Creacion%20de%20una%20aplicacion.pdf))
+4.  El modelo en Django,  acceso a datos y la aplicación de administrador ([slides](https://github.com/jvadillo/curso-django-paso-a-paso/blob/master/slides/04-Django-%20Bases%20de%20datos,%20modelo%20y%20aplicacion%20de%20administrador.pdf))
+5.  Vistas y plantillas en Django ([slides](https://github.com/jvadillo/curso-django-paso-a-paso/blob/master/slides/05-Django-Vistas%20y%20plantillas.pdf))
+6.  Vistas basadas en clases ([slides](https://github.com/jvadillo/curso-django-paso-a-paso/blob/master/slides/06-Django-Vistas%20basadas%20en%20clases.pdf))
+7. Formularios en Django ([slides](https://github.com/jvadillo/curso-django-paso-a-paso/blob/master/slides/07-Django-Formularios.pdf))
+
 ## Hands on!
 
 The file explorer is accessible using the button in left corner of the navigation bar. You can create a new file by clicking the **New file** button in the file explorer. You can also create folders by clicking the **New folder** button.
