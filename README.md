@@ -29,11 +29,11 @@ The file explorer is accessible using the button in left corner of the navigatio
 
 Crear el entorno virtual
     
-      mkvirtualenv env1
+      mkvirtualenv empresaDjango
 
  Activar el entorno
     
-      workon curso-django
+      workon empresaDjango
     
     
 Instalar Django
@@ -45,7 +45,7 @@ Instalar Django
 
 Crea el proyecto Django:
 
-      django-admin startproject curso-django
+      django-admin startproject empresaDjango
     
     
    La estructura de ficheros resultante es la siguiente:
@@ -64,11 +64,11 @@ Crea el proyecto Django:
    Inicia el servidor con el comando `python manage.py runserver` dentro del directorio del proyecto.
 
 ### PASO 3: Crea tu primera aplicación
-Posicionate en el directorio del proyecto `$ cd <outer_project_folder>`
+Posicionate en el directorio del proyecto `$ cd <project_folder>`
 
 Crea la aplicación ejecutando el siguiente comando:
 
-`python manage.py startapp app-curso-django`
+`python manage.py startapp appEmpresaDjango`
 
 Dentro del directorio de la aplicación, crear un fichero llamado `urls.py` que utilizaremos para mapear las URLs de nuestra aplicación.
 
@@ -99,7 +99,7 @@ La estructura de ficheros resultante será la siguiente:
 Incluir a aplicación dentro del fichero `settings.py` del proyecto, añadiendo el nombre a la lista `INSTALLED_APPS`:
 	
 	 INSTALLED_APPS = [
-	 	'app-curso-django',
+	 	'appEmpresaDjango',
 	 	# ...
 	 ]
 
@@ -123,20 +123,13 @@ Abrir (o crear) el fichero `urls.py` y añadir el patrón para la siguiente ruta
         path('', views.index, name='index'),
     ]
    ```
-Dentro del directorio del proyecto, editar `urls.py` para incluir la redirección al fichero `urls.py` de la alpicación:
-  ```python 
-    urlpatterns = [
-        path("", include('app-curso-django.urls')),
-    ]
-   ```
-
-El resultado debe ser el siguiente:
+Dentro del directorio del proyecto, editar `urls.py` para incluir la redirección al fichero `urls.py` de la aplicación. El resultado debe ser el siguiente:
    ```python
    from django.contrib import admin
    from django.urls import include, path
   
    urlpatterns = [
-       path('app/', include('app.urls')),
+       path('appEmpresaDjango/', include('appEmpresaDjango.urls')),
        path('admin/', admin.site.urls),
    ]
    ```
@@ -167,7 +160,7 @@ Editar el fichero `models.py` de la aplicación creando las clases Empresa y Tra
 Aplica los cambios realizados en el modelo mediante los siguientes comandos:
     
    ```
-    $ python manage.py makemigrations <app_name>
+    $ python manage.py makemigrations appEmpresaDjango
     $ python manage.py migrate
    
    ```
@@ -218,14 +211,14 @@ Una vez dentro, ya puedes comenzar a crear y consultar registros.
 	'Oficina Tecnica'
 	
 	# También es posible acceder desde el padre a todos sus hijos.
-	>>> departamento.empelado_set.all()
+	>>> departamento.empleado_set.all()
 	<QuerySet [<Empleado: Empleado object (1)>, <Empleado: Empleado object (2)>, <Empleado: Empleado object (3)>]>
 	
-	>>>> departamento.empelado_set.count()
+	>>>> departamento.empleado_set.count()
 	3
    ```
 
-Podemos añadir el método ```__str__()``` que será invocado al llamar a los métodos *print* o *str* de nuestros objetos. De esta forma podremos identificarlos más fácilmente.
+Podemos añadir el método ```__str__()``` dentro de cada clase de nuestro modelo, que será invocado al llamar a los métodos *print* o *str* de nuestros objetos. De esta forma podremos identificarlos más fácilmente.
 
 ```python
 def __str__(self):
@@ -234,7 +227,7 @@ def __str__(self):
 
 ### PASO 7: Utiliza la aplicación de Administración de Django para visualizar y añadir registros
 
-La aplicación de administración permite visualizar la información de nuestros modelos de forma sencilla. Crear un usuario para la aplicación de Administración
+La aplicación de administración permite visualizar la información de nuestros modelos de forma sencilla. Crear un usuario "adminDjango" (contraseña: "adminDjango") para la aplicación de administración:
     
     ```
      python manage.py createsuperuser
@@ -253,10 +246,10 @@ Entrar en la aplicación [http://127.0.0.1:8000/admin](http://127.0.0.1:8000/adm
 
 Creamos las vistas correspondientes a las siguientes URLs:
 | URL | Descripción de la vista |
-|--|--|
-|/app-curso-django/  | Muestra todos los departamentos  |
-|/app-curso-django/<:id>  | Muestra los detalles de un departamento a partir del ID indicado  |
-|/app-curso-django/<:id>/empleados  | Muestra los empleados del departamento con el ID indicado  |
+| -- | -- |
+| /app-curso-django/  | Muestra todos los departamentos  |
+| /app-curso-django/<:id>  | Muestra los detalles de un departamento a partir del ID indicado  |
+| /app-curso-django/<:id>/empleados  | Muestra los empleados del departamento con el ID indicado  |
 
 Creamos las vistas (cada vista estará definida por una función):
 ```python
@@ -279,7 +272,7 @@ def detail(request, departamento_id):
 #devuelve los empelados de un departamento
 def empleados(request, departamento_id):
 	departamento = Departamento.objects.get(pk=departamento_id)
-	output = ', '.join([e.nombre for e in departamento.empelado_set.all()])
+	output = ', '.join([e.nombre for e in departamento.empleado_set.all()])
 	return HttpResponse(output)
 ```
 
@@ -348,12 +341,12 @@ def detail(request, departamento_id):
 #devuelve los empelados de un departamento
 def empleados(request, departamento_id):
 	departamento = get_object_or_404(Departamento, pk=departamento_id)
-	empleados =  departamento.empelado_set.all()
+	empleados =  departamento.empleado_set.all()
 	context = {'departamento': departamento, 'empleados' : empleados }
 	return render(request, 'empleados.html', context)
 ```
 
-Crea las plantillas que definan la estructura de las páginas HTML resultantes:
+Crea las plantillas (en una carpeta "templates" dentro del directorio de la aplicación) que definan la estructura de las páginas HTML resultantes :
 
 Plantilla detail.html:
 
@@ -368,7 +361,7 @@ Plantilla detail.html:
 	<ul>
 	{% for d in lista_departamentos %}
 		<li>
-		    <a href="/app-curso-django/{{ d.id }}">{{ d.nombre}}</a>
+		    <a href="/appEmpresaDjango/{{ d.id }}">{{ d.nombre}}</a>
 		</li>
 	{% endfor %}
 	</ul>
@@ -396,11 +389,11 @@ Plantilla detail.html:
             {{ departamento.telefono}}
         </li>
         <li>
-            <a href="/app-curso-django/departamento/{{ departamento.id }}/empleados">Ver empleados</a>
+            <a href="/appEmpresaDjango/departamento/{{ departamento.id }}/empleados">Ver empleados</a>
         </li>
     </ul>
 {% else %}
-    <p>No hay departamentos creados.</p>
+    <p>No existe este departamento.</p>
 {% endif %}
 
 {% endblock %}
@@ -411,7 +404,7 @@ Plantilla empleados.html:
 ```python
 {% extends "base.html" %}
 
-{% block titulo %} Empelados del departamento {% endblock %}
+{% block titulo %} Empleados del departamento {% endblock %}
 
 {% block contenido %}
 <h2>Lista de empleados</h2>
@@ -425,7 +418,7 @@ Plantilla empleados.html:
 	{% endfor %}
 	</ul>
 {% else %}
-<p>No hay departamentos creados.</p>
+<p>No hay empleados creados.</p>
 {% endif %}
 {% endblock %}
 ```
@@ -436,7 +429,7 @@ Plantilla empleados.html:
 
 Django permite crear una plantilla base que contenga el “esqueleto” con todos los elementos comunes y definir bloques que puedan sobreescritos por las plantillas que la hereden. 
 
-Crea una plantilla base:
+Crea una plantilla "base.html":
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -446,7 +439,7 @@ Crea una plantilla base:
     </head>
     <body>
         <div id="content">
-	     <h1>Gestor de Empeleados</h1>
+	     <h1>Gestor de Empleeados</h1>
             {% block contenido %}{% endblock %}
         </div>
     </body>
@@ -454,29 +447,11 @@ Crea una plantilla base:
 ```
 
 
-Creas las plantillas específicas que hereden de la plantilla base:
+Las plantillas específicas que heredan de la plantilla base, como ya pusimos en las vistas anteriores:
 
 ```python
 #index.html:
 {% extends "base.html" %}
-
-{% block titulo %}Listado de departamentos{% endblock %}
-
-{% block contenido %}
-<h2>Listado de departamentos</h2>
-{% if lista_departamentos %}
-	<ul>
-	{% for d in lista_departamentos %}
-		<li>
-		    <a href="/polls/{{ d.id }}/">{{ d.nombre}}</a>
-		</li>
-	{% endfor %}
-	</ul>
-{% else %}
-<p>No hay departamentos creados.</p>
-{% endif %}
-{% endblock %}
-
 ```
 
 ### PASO 12: Actualizar las URLs
@@ -485,9 +460,12 @@ En lugar de utilizar la ruta de la URL, podemos utilizar el nombre que le hemos 
 
 Antes:
 ```html
-<li><a href="/miApp/{{ empresa.id }}/">{{ d.nombre }}</a></li>
+<li><a href="/appEmpresaDjango/{{ empresa.id }}/">{{ d.nombre }}</a></li>
 ```
 Ahora
 ```html
 <li><a href="{% url 'detail' d.id %}">{{ d.nombre}}</a></li>
 ```
+Cambia también el resto en las vistas correspondientes.
+
+Entrar en la aplicación [http://127.0.0.1:8000/appEmpresaDjango/](http://127.0.0.1:8000/appEmpresaDjango/)
