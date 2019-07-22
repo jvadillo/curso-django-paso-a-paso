@@ -323,6 +323,7 @@ def empleados(request, departamento_id):
 Actualiza las vistas creadas en `views.py`:
 
 ```python
+from django.shortcuts import get_object_or_404, get_list_or_404
 from django.shortcuts import render
 from .models import Departamento, Empleado
 
