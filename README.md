@@ -470,3 +470,7 @@ Ahora
 Cambia también el resto en las vistas correspondientes.
 
 Entrar en la aplicación [http://127.0.0.1:8000/appEmpresaDjango/](http://127.0.0.1:8000/appEmpresaDjango/)
+
+# Curso de iniciación a Django paso a paso
+
+Para contriburi envía un email a vadillo.jon@gmail.com
