@@ -471,6 +471,18 @@ Cambia también el resto en las vistas correspondientes.
 
 Entrar en la aplicación [http://127.0.0.1:8000/appEmpresaDjango/](http://127.0.0.1:8000/appEmpresaDjango/)
 
-# Contribuciones
+## Contribuir
+Toda contribución es más que bienvenida. Puedes contribuir con este libro de las siguientes:
+- Ayuda a mejorar el material notificando errores, planteando mejoras o incluso nuevos ejercicios prácticos.
+- Comparte y recomienda este libro o el repositorio en las redes sociales.
+- Recuerda que puedes adquirir este libro por el precio que consideres (¡desde cero euros!)
 
-Para contriburi envía un email a vadillo.jon@gmail.com
+Para contribuir puedes contactarme vía email a vadillo.jon@gmail.com
+
+## Licencia
+
+![Licencia_img](http://mirrors.creativecommons.org/presskit/buttons/80x15/png/by-nc-sa.png)
+
+Este libro esta licenciado como [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es_ES) aunque no necesariamente las imágenes de su interior.
+
+El código que contiene este [repositorio](https://github.com/jvadillo/aprende-python-desde-cero-a-experto/) se encuenta bajo la licencia [GNU GPL-3.0](https://github.com/jvadillo/aprende-python-desde-cero-a-experto/blob/master/LICENSE)
