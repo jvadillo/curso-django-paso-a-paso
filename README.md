@@ -7,6 +7,10 @@ Este es un curso diseñado para aprender desarrollar aplicaciones web con **Djan
 El curso requiere unos conocimientos básicos de **Python, HTML y CSS**.
 Del mismo modo partirá de la base de que tienes **Python, PIP y virtualenvwrapper** instalado en el sistema.
 
+Puedes encontrar cursos y tutoriales sobre HTML, CSS y Python en [www.jonvadillo.com](http://jonvadillo.com)
+
+Si no dispones de conocimientos previos en Python o te gustaría consolidarlos, tienes un disponible el libro gratuito "Apende Python desde cero a experto" en [este enlace](https://leanpub.com/aprende-python) (también puedes acceder directamente al repositorio [desde aquí](https://github.com/jvadillo/aprende-python-desde-cero-a-experto)).
+
 
 ## Material
 
