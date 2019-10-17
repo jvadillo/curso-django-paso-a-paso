@@ -177,9 +177,9 @@ Accede al intérprete interactivo de Django escribiendo el siguiente comando:
 
 Una vez dentro, ya puedes comenzar a crear y consultar registros.
    ```python
-	>>> from djangoapp.models import Departamento, Empleado
+	>>> from appEmpresaDjango.models import Departamento, Empleado
 	>>> departamento = Departamento(nombre="Oficina Tecnica", telefono="945010101")
-	>>> departamento .save()
+	>>> departamento.save()
 	# Django le asigna un id.
 	>>> departamento.id
 	1
@@ -220,6 +220,8 @@ Una vez dentro, ya puedes comenzar a crear y consultar registros.
 	
 	>>>> departamento.empleado_set.count()
 	3
+	
+	>>>> quit()
    ```
 
 Podemos añadir el método ```__str__()``` dentro de cada clase de nuestro modelo, que será invocado al llamar a los métodos *print* o *str* de nuestros objetos. De esta forma podremos identificarlos más fácilmente.
@@ -238,6 +240,15 @@ La aplicación de administración permite visualizar la información de nuestros
     
     ```
     
+Editar el fichero `admin.py` para registrar las clases de nuestro modelo y que se puedan ver en la aplicación de administración por defecto que trae Django:
+    
+   ```
+    from django.contrib import admin
+	from .models import Departamento, Empleado
+	admin.site.register(Departamento)
+	admin.site.register(Empleado)
+   ```
+
 Iniciar el servidor y entrar
     
    ```
@@ -353,7 +364,7 @@ def empleados(request, departamento_id):
 
 Crea las plantillas (en una carpeta "templates" dentro del directorio de la aplicación) que definan la estructura de las páginas HTML resultantes :
 
-Plantilla detail.html:
+Plantilla index.html:
 
 ```python
 {% extends "base.html" %}
@@ -440,11 +451,11 @@ Crea una plantilla "base.html":
 <html lang="en">
     <head>
         <link rel="stylesheet" href="style.css">
-        <title>{% block titulo %}Gestor de Empleados {% endblock %}</title>
+        <title>{% block titulo %}Gestor de Empleados{% endblock %}</title>
     </head>
     <body>
         <div id="content">
-	     <h1>Gestor de Empleeados</h1>
+	     <h1>Gestor de Empleados</h1>
             {% block contenido %}{% endblock %}
         </div>
     </body>
@@ -452,7 +463,7 @@ Crea una plantilla "base.html":
 ```
 
 
-Las plantillas específicas que heredan de la plantilla base, como ya pusimos en las vistas anteriores:
+Las plantillas específicas que heredan de la plantilla base, como ya pusimos en las vistas anteriores, deben llevar una única directiva "extends":
 
 ```python
 #index.html:
@@ -465,7 +476,7 @@ En lugar de utilizar la ruta de la URL, podemos utilizar el nombre que le hemos 
 
 Antes:
 ```html
-<li><a href="/appEmpresaDjango/{{ empresa.id }}/">{{ d.nombre }}</a></li>
+<li><a href="/appEmpresaDjango/{{ d.id }}/">{{ d.nombre }}</a></li>
 ```
 Ahora
 ```html
