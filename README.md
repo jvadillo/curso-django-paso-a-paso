@@ -142,24 +142,28 @@ De este modo tenemos un `urls.py` en cada directorio de nuestras aplicaciones ge
 
 ### PASO 5: Crea el modelo de nuestra aplicación
 
-Editar el fichero `models.py` de la aplicación creando las clases Empresa y Trabajador:
+Editar el fichero `models.py` de la aplicación creando las clases Departamento, Habilidad y Empleado:
 
    ```python
-     from django.db import models
+    from django.db import models
     
-     class Departamento(models.Model):
+    class Departamento(models.Model):
         # No es necesario crear un campo para la Primary Key, Django creará automáticamente un IntegerField.
         nombre = models.CharField(max_length=50)
         telefono = models.IntegerField()
+
+    class Habilidad(models.Model):
+    	# No es necesario crear un campo para la Primary Key, Django creará automáticamente un IntegerField.
+    	nombre = models.CharField(max_length=50)
     
-     class Empleado(models.Model):
+    class Empleado(models.Model):
         # Campo para la relación one-to-many
         departamento = models.ForeignKey(Departamento, on_delete=models.CASCADE)
+        habilidades = models.ManyToManyField(Habilidad)
         nombre = models.CharField(max_length=40)
         fecha_nacimiento = models.DateField()
         # Es posible indicar un valor por defecto mediante 'default'
-        antiguedad = models.IntegerField(default=0)
-        
+        antiguedad = models.IntegerField(default=0)    
 ```    
 Aplica los cambios realizados en el modelo mediante los siguientes comandos:
     
@@ -177,7 +181,7 @@ Accede al intérprete interactivo de Django escribiendo el siguiente comando:
 
 Una vez dentro, ya puedes comenzar a crear y consultar registros.
    ```python
-	>>> from appEmpresaDjango.models import Departamento, Empleado
+	>>> from appEmpresaDjango.models import Departamento, Habilidad, Empleado
 	>>> departamento = Departamento(nombre="Oficina Tecnica", telefono="945010101")
 	>>> departamento.save()
 	# Django le asigna un id.
@@ -224,7 +228,7 @@ Una vez dentro, ya puedes comenzar a crear y consultar registros.
 	>>>> quit()
    ```
 
-Podemos añadir el método ```__str__()``` dentro de cada clase de nuestro modelo, que será invocado al llamar a los métodos *print* o *str* de nuestros objetos. De esta forma podremos identificarlos más fácilmente.
+Es recomendable incluir un método ```__str__()``` dentro de cada clase de nuestro modelo para que sea invocado al llamar a los métodos *print* o *str* de nuestros objetos, que por ejemplo son usados internamente desde los formularios de la aplicación de administración que ofrece Django por defecto. De esta forma tendremos la posibilidad de mostrar objetos binarios como texto e identificarlos más fácilmente.
 
 ```python
 def __str__(self):
@@ -244,8 +248,9 @@ Editar el fichero `admin.py` para registrar las clases de nuestro modelo y que s
     
    ```
     from django.contrib import admin
-	from .models import Departamento, Empleado
+	from .models import Departamento, Habilidad, Empleado
 	admin.site.register(Departamento)
+	admin.site.register(Habilidad)
 	admin.site.register(Empleado)
    ```
 
@@ -255,22 +260,24 @@ Iniciar el servidor y entrar
     python manage.py runserver
    ```
     
-Entrar en la aplicación [http://127.0.0.1:8000/admin](http://127.0.0.1:8000/admin)
+Entrar en la aplicación [http://127.0.0.1:8000/admin](http://127.0.0.1:8000/admin) y añadir algunas entradas en cada entidad para tener un juego de ensayo que luego se pueda ver desde la aplicación [http://127.0.0.1:8000/appEmpresaDjango](http://127.0.0.1:8000/appEmpresaDjango)
 
 ### PASO 8: Crea las vistas y urls para interactuar con el modelo
 
 Creamos las vistas correspondientes a las siguientes URLs:
 | URL | Descripción de la vista |
 | -- | -- |
-| /app-curso-django/  | Muestra todos los departamentos  |
-| /app-curso-django/<:id>  | Muestra los detalles de un departamento a partir del ID indicado  |
-| /app-curso-django/<:id>/empleados  | Muestra los empleados del departamento con el ID indicado  |
+| /appEmpresaDjango  | Muestra todos los departamentos  |
+| /appEmpresaDjango/departamento/<:id>  | Muestra los detalles de un departamento a partir del ID indicado  |
+| /appEmpresaDjango/departamento/<:id>/empleados  | Muestra los empleados del departamento con el ID indicado  |
+| /appEmpresaDjango/empleado/<:id>  | Muestra los detalles del empleado con el ID indicado  |
+| /appEmpresaDjango/habilidad/<:id>  | Muestra los detalles de la habilidad con el ID indicado  |
 
 Creamos las vistas (cada vista estará definida por una función):
 ```python
 from django.http import HttpResponse, Http404
 from django.shortcuts import get_object_or_404, get_list_or_404
-from .models import Departamento, Empleado
+from .models import Departamento, Habilidad, Empleado
 
 #devuelve el listado de empresas
 def index(request):
@@ -284,10 +291,22 @@ def detail(request, departamento_id):
 	output = ', '.join([str(departamento.id), departamento.nombre, str(departamento.telefono)])
 	return HttpResponse(output)
 
-#devuelve los empelados de un departamento
+#devuelve los empleados de un departamento
 def empleados(request, departamento_id):
 	departamento = Departamento.objects.get(pk=departamento_id)
 	output = ', '.join([e.nombre for e in departamento.empleado_set.all()])
+	return HttpResponse(output)
+
+#devuelve los detalles de un empleado
+def empleado(request, empleado_id):
+	empleado = Empleado.objects.get(pk=empleado_id)
+	output = ', '.join([str(empleado.id), empleado.nombre, str(empleado.fecha_nacimiento), str(empleado.antiguedad), str(empleado.departamento), h.nombre for h in empleado.habilidades.all()])
+	return HttpResponse(output)
+
+#devuelve los detalles de una habilidad
+def habilidad(request, habilidad_id):
+	habilidad = Habilidad.objects.get(pk=habilidad_id)
+	output = ', '.join([str(habilidad.id), habilidad.nombre, e.nombre for e in habilidad.empleado_set.all()])
 	return HttpResponse(output)
 ```
 
@@ -298,8 +317,10 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('<int:departamento_id>/', views.detail, name='detail'),
-    path('departamento/<int:departamento_id>/empleados', views.empleados, name='empleados')
+    path('departamento/<int:departamento_id>/', views.detail, name='detail'),
+    path('departamento/<int:departamento_id>/empleados', views.empleados, name='empleados'),
+    path('empleado/<int:empleado_id>', views.empleado, name='empleado'),
+    path('habilidad/<int:habilidad_id>', views.habilidad, name='habilidad')
 ]
 ```
 
@@ -310,7 +331,7 @@ Utiliza el método `get_object_or_404` para controlar los casos en los que el re
 ```python
 from django.http import HttpResponse, Http404
 from django.shortcuts import get_object_or_404, get_list_or_404
-from .models import Departamento, Empleado
+from .models import Departamento, Habilidad, Empleado
 
 
 #devuelve el listado de empresas
@@ -325,10 +346,22 @@ def detail(request, departamento_id):
 	output = ' ---- '.join([str(departamento.id), departamento.nombre, str(departamento.telefono)])
 	return HttpResponse(output)
 
-#devuelve los empelados de un departamento
+#devuelve los empleados de un departamento
 def empleados(request, departamento_id):
 	departamento = get_object_or_404(Departamento, pk=departamento_id)
 	output = ', '.join([e.nombre for e in departamento.empleado_set.all()])
+	return HttpResponse(output)
+
+#devuelve los detalles de un empleado
+def empleado(request, empleado_id):
+	empleado = get_object_or_404(Empleado, pk=empleado_id)
+	output = ', '.join([str(empleado.id), empleado.nombre, str(empleado.fecha_nacimiento), str(empleado.antiguedad), str(empleado.departamento), h.nombre for h in empleado.habilidades.all()])
+	return HttpResponse(output)
+
+#devuelve los detalles de una habilidad
+def habilidad(request, habilidad_id):
+	habilidad = get_object_or_404(Habilidad, pk=habilidad_id)
+	output = ', '.join([str(habilidad.id), habilidad.nombre, e.nombre for e in habilidad.empleado_set.all()])
 	return HttpResponse(output)
 ```
 
@@ -340,7 +373,7 @@ Actualiza las vistas creadas en `views.py`:
 ```python
 from django.shortcuts import get_object_or_404, get_list_or_404
 from django.shortcuts import render
-from .models import Departamento, Empleado
+from .models import Departamento, Habilidad, Empleado
 
 #devuelve el listado de empresas
 def index(request):
@@ -360,6 +393,20 @@ def empleados(request, departamento_id):
 	empleados =  departamento.empleado_set.all()
 	context = {'departamento': departamento, 'empleados' : empleados }
 	return render(request, 'empleados.html', context)
+
+#devuelve los detalles de un empleado
+def empleado(request, empleado_id):
+	empleado = get_object_or_404(Empleado, pk=empleado_id)
+	habilidades =  empleado.habilidades.all()
+    context = { 'empleado': empleado, 'habilidades' : habilidades }
+    return render(request, 'empleado.html', context)
+
+# Devuelve los detalles de una habilidad
+def habilidad(request, habilidad_id):
+    habilidad = get_object_or_404(Habilidad, pk=habilidad_id)
+    empleados =  habilidad.empleado_set.all()
+    context = { 'empleados': empleados, 'habilidad' : habilidad }
+    return render(request, 'habilidad.html', context)
 ```
 
 Crea las plantillas (en una carpeta "templates" dentro del directorio de la aplicación) que definan la estructura de las páginas HTML resultantes :
@@ -377,7 +424,7 @@ Plantilla index.html:
 	<ul>
 	{% for d in lista_departamentos %}
 		<li>
-		    <a href="/appEmpresaDjango/{{ d.id }}">{{ d.nombre}}</a>
+		    <a href="/appEmpresaDjango/departamento/{{ d.id }}">{{ d.nombre}}</a>
 		</li>
 	{% endfor %}
 	</ul>
@@ -391,7 +438,7 @@ Plantilla detail.html:
 ```python
 {% extends "base.html" %}
 
-{% block titulo %} Detalle de departamento {% endblock %}
+{% block titulo %} Detalle del departamento {% endblock %}
 
 {% block contenido %}
 <h2>Datos del departamento</h2>
@@ -429,7 +476,7 @@ Plantilla empleados.html:
 	<ul>
 	{% for e in empleados %}
 		<li>
-		    {{ e.nombre}}
+		    <a href="/appEmpresaDjango/empleado/{{ e.id }}">{{ e.nombre}}</a>
 		</li>
 	{% endfor %}
 	</ul>
@@ -439,7 +486,78 @@ Plantilla empleados.html:
 {% endblock %}
 ```
 
+Plantilla empleado.html:
 
+```python
+{% extends "base.html" %}
+
+{% block titulo %} Detalles del empleado {% endblock %}
+
+{% block contenido %}
+
+<h2>Datos del empleado</h2>
+
+{% if empleado %}
+    <ul>
+        <li>
+            {{ empleado.nombre}}
+        </li>
+        <li>
+            {{ empleado.fecha_nacimiento}}
+        </li>
+        <li>
+            {{ empleado.antiguedad}}
+        </li>
+        <li>
+            <a href="/appEmpresaDjango/departamento/{{ empleado.departamento.id }}">{{ empleado.departamento}}</a>
+        </li>
+    </ul>
+	<h3>Lista de habilidades</h3>
+	{% if habilidades %}
+		<ol>
+		{% for h in habilidades %}
+			<li><a href="/appEmpresaDjango/habilidad/{{ h.id }}">{{ h.nombre}}</a></li>
+		{% endfor %}
+		</ol>
+	{% else %}
+		<p>No tiene habilidades asociadas.</p>
+	{% endif %}
+{% else %}
+    <p>No existe este empleado.</p>
+{% endif %}
+
+{% endblock %}
+```
+
+Plantilla habilidad.html:
+
+```python
+{% extends "base.html" %}
+
+{% block titulo %} Detalles de la habilidad {% endblock %}
+
+{% block contenido %}
+
+<h2>Datos de la habilidad</h2>
+
+{% if habilidad %}
+    <h3>{{ habilidad.nombre}}</h3>
+	<h3>Lista de empleados</h3>
+	{% if empleados %}
+		<ol>
+		{% for e in empleados %}
+			<li><a href="/appEmpresaDjango/empleado/{{ e.id }}">{{ e.nombre}}</a></li>
+		{% endfor %}
+		</ol>
+	{% else %}
+		<p>No tiene empleados asociados.</p>
+	{% endif %}
+{% else %}
+    <p>No existe esta habilidad.</p>
+{% endif %}
+
+{% endblock %}
+```
 
 ### PASO 11: La herencia en plantillas
 
@@ -476,13 +594,13 @@ En lugar de utilizar la ruta de la URL, podemos utilizar el nombre que le hemos 
 
 Antes:
 ```html
-<li><a href="/appEmpresaDjango/{{ d.id }}/">{{ d.nombre }}</a></li>
+<li><a href="/appEmpresaDjango/departamento/{{ d.id }}">{{ d.nombre }}</a></li>
 ```
 Ahora
 ```html
 <li><a href="{% url 'detail' d.id %}">{{ d.nombre}}</a></li>
 ```
-Cambia también el resto en las vistas correspondientes.
+Cambia también el resto de URLs en las vistas correspondientes.
 
 Entrar en la aplicación [http://127.0.0.1:8000/appEmpresaDjango/](http://127.0.0.1:8000/appEmpresaDjango/)
 
