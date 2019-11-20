@@ -265,6 +265,7 @@ Entrar en la aplicación [http://127.0.0.1:8000/admin](http://127.0.0.1:8000/adm
 ### PASO 8: Crea las vistas y urls para interactuar con el modelo
 
 Creamos las vistas correspondientes a las siguientes URLs:
+
 | URL | Descripción de la vista |
 | -- | -- |
 | /appEmpresaDjango  | Muestra todos los departamentos  |
