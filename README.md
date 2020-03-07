@@ -27,7 +27,8 @@ En este repositorio puedes encontrar todas las presentaciones para ir aprendiend
 
 ## Hands on!
 
-The file explorer is accessible using the button in left corner of the navigation bar. You can create a new file by clicking the **New file** button in the file explorer. You can also create folders by clicking the **New folder** button.
+Tan solo necesitas seguir  los pasos descritos en esta sección para lograr desarrollar tu primera aplicación web con Django. 
+Recuerda que como pre-requisito tienes que tener **Python, PIP y virtualenvwrapper** instalado en el sistema. ¡Happy Coding!
 
 ### PASO 1: Instala Django en un entorno virtual 
 
