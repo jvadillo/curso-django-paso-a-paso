@@ -45,6 +45,8 @@ Instalar Django
 
       pip install django
 
+Si tienes dudas sobre el uso de virtualenvwrapper y su configuración en PyCharm o Visual Studio Code, [puedes ver este video](https://youtu.be/lJrs7P9eKXc) donde se explica todo lo que necesitas saber.
+
 
 ### PASO 2: Crea tu primer proyecto
 
