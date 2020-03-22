@@ -167,8 +167,8 @@ Editar el fichero `models.py` de la aplicación creando las clases Departamento,
         fecha_nacimiento = models.DateField()
         # Es posible indicar un valor por defecto mediante 'default'
         antiguedad = models.IntegerField(default=0)
-	# Para permitir propiedades con valor null, añadiremos las opciones null=True, blank=True.
-	
+        # Para permitir propiedades con valor null, añadiremos las opciones null=True, blank=True.
+        	
 ```    
 Aplica los cambios realizados en el modelo mediante los siguientes comandos:
     
