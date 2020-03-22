@@ -330,7 +330,7 @@ urlpatterns = [
 ]
 ```
 
-### PASO 9: Mejora las vistas controlando errores 404
+### PASO 9 (opcional): Mejora las vistas controlando errores 404
 
 Utiliza el método `get_object_or_404` para controlar los casos en los que el registro de la petición no exista:
 
