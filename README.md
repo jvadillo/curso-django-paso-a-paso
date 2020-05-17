@@ -17,15 +17,16 @@ Si no dispones de conocimientos previos en Python o te gustaría consolidarlos, 
 En este repositorio puedes encontrar todas las presentaciones para ir aprendiendo Django desde cero y paso a paso. Por otro lado en esta misma página también puedes encontrar una guía resumen con todos los pasos necesarios para crear una aplicación web con Django.
 ### Slides
 
-1.  Introducción y fundamentos básicos: [slides](https://github.com/jvadillo/curso-django-paso-a-paso/blob/master/slides/01-Django-Introduccion.pdf)  |  [vídeo-tutorial](https://youtu.be/yZDH6vH3iM8)
-2.  Crea tu primer proyecto en Django: [slides](https://github.com/jvadillo/curso-django-paso-a-paso/blob/master/slides/02-Django-Crear%20proyecto.pdf)  |  [vídeo-tutorial](https://youtu.be/cIXG5GkoTOE)
-3.  Crea tu primera aplicación en django: [slides](https://github.com/jvadillo/curso-django-paso-a-paso/blob/master/slides/03-Django-Creacion%20de%20una%20aplicacion.pdf)  |  [vídeo-tutorial](https://youtu.be/Ewe4QAP0wuU)
+1.  Introducción y fundamentos básicos: [slides](https://github.com/jvadillo/curso-django-paso-a-paso/blob/master/slides/01-Django-Introduccion.pdf)
+2.  Crea tu primer proyecto en Django: [slides](https://github.com/jvadillo/curso-django-paso-a-paso/blob/master/slides/02-Django-Crear%20proyecto.pdf)
+3.  Crea tu primera aplicación en django: [slides](https://github.com/jvadillo/curso-django-paso-a-paso/blob/master/slides/03-Django-Creacion%20de%20una%20aplicacion.pdf)
 4.  El modelo en Django,  acceso a datos y la aplicación de administrador ([slides](https://github.com/jvadillo/curso-django-paso-a-paso/blob/master/slides/04-Django-%20Bases%20de%20datos,%20modelo%20y%20aplicacion%20de%20administrador.pdf))
 5.  Vistas y plantillas en Django ([slides](https://github.com/jvadillo/curso-django-paso-a-paso/blob/master/slides/05-Django-Vistas%20y%20plantillas.pdf))
 6.  Vistas basadas en clases ([slides](https://github.com/jvadillo/curso-django-paso-a-paso/blob/master/slides/06-Django-Vistas%20basadas%20en%20clases.pdf))
 7. Formularios en Django ([slides](https://github.com/jvadillo/curso-django-paso-a-paso/blob/master/slides/07-Django-Formularios.pdf))
 
 ### Video-tutoriales
+#### Curso Django
 - Curso Django - Paso 1. Introducción + Instalación URL ([ir al video](https://youtu.be/yZDH6vH3iM8))
 - Curso Django - Paso 2. Crear un proyecto URL ([ir al video](https://youtu.be/cIXG5GkoTOE))
 - Curso Django - Paso 3. Crear una aplicación URL ([ir al video](https://youtu.be/Ewe4QAP0wuU))
@@ -41,6 +42,7 @@ En este repositorio puedes encontrar todas las presentaciones para ir aprendiend
 - Django paso a paso. Paso 13: Formularios (1/3) URL ([ir al video](https://youtu.be/zsE3JwM63wU))
 - Django paso a paso. Paso 14 Formularios (2/3) ([ir al video](https://youtu.be/KFVW3-a5k4c))
 
+#### Otros
 - Tutorial Python: cómo utilizar entornos virtuales (virtualenv y configuración en PyCharm y VS Code) ([ir al video](https://youtu.be/lJrs7P9eKXc))
 
 - Videotutorial: Crear un API con Django ([ir al video](https://youtu.be/XqRBb_4CLS4))
