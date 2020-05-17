@@ -25,6 +25,27 @@ En este repositorio puedes encontrar todas las presentaciones para ir aprendiend
 6.  Vistas basadas en clases ([slides](https://github.com/jvadillo/curso-django-paso-a-paso/blob/master/slides/06-Django-Vistas%20basadas%20en%20clases.pdf))
 7. Formularios en Django ([slides](https://github.com/jvadillo/curso-django-paso-a-paso/blob/master/slides/07-Django-Formularios.pdf))
 
+### Video-tutoriales
+- Curso Django - Paso 1. Introducción + Instalación URL ([ir al video](https://youtu.be/yZDH6vH3iM8))
+- Curso Django - Paso 2. Crear un proyecto URL ([ir al video](https://youtu.be/cIXG5GkoTOE))
+- Curso Django - Paso 3. Crear una aplicación URL ([ir al video](https://youtu.be/Ewe4QAP0wuU))
+- Curso Django - Paso 4. Crear una vista URL ([ir al video](https://youtu.be/nYe-h06cEvM))
+- Curso Django - Paso 5. Modelos y acceso a datos URL ([ir al video](https://youtu.be/Br_Z-8BF9Qg))
+- Curso Django - Paso 6. Aplicación de administración URL ([ir al video](https://youtu.be/9yDd8OrIVfk))
+- Curso Django - Paso 7. Creación de vistas Básicas URL ([ir al video](https://youtu.be/E_8fAfGvKVs))
+- Curso Django - Paso 8. Plantillas (templates) URL ([ir al video](https://youtu.be/th3VMi-a8mk))
+- Curso Django - Paso 9. Herencia de plantillas URL ([ir al video](https://youtu.be/zcBPKBq6v84))
+- Django paso a paso. Paso 10: archivos estáticos (CSS, JS, ...) URL ([ir al video](https://youtu.be/yP8HeZ6Hdlw))
+- Django paso a paso. Paso 11: acceso a URLs mediante el nombre ([ir al video](https://youtu.be/cIvfIbU_3z0))
+- Django paso a paso. Paso 12: Vistas genéricas basadas en clases (DetailView y ListView) URL ([ir al video](https://youtu.be/4dGG5G9Ixsc))
+- Django paso a paso. Paso 13: Formularios (1/3) URL ([ir al video](https://youtu.be/zsE3JwM63wU))
+- Django paso a paso. Paso 14 Formularios (2/3) ([ir al video](https://youtu.be/KFVW3-a5k4c))
+
+- Tutorial Python: cómo utilizar entornos virtuales (virtualenv y configuración en PyCharm y VS Code) ([ir al video](https://youtu.be/lJrs7P9eKXc))
+
+- Videotutorial: Crear un API con Django ([ir al video](https://youtu.be/XqRBb_4CLS4))
+
+
 ## Hands on!
 
 Tan solo necesitas seguir  los pasos descritos en esta sección para lograr desarrollar tu primera aplicación web con Django. 
