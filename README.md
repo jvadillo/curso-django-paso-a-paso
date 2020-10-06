@@ -371,7 +371,7 @@ def index(request):
 def detail(request, departamento_id):
 	departamento = Departamento.objects.get(pk=departamento_id)
 	# output = ', '.join([str(departamento.id), departamento.nombre, str(departamento.telefono)])
-	output = f"{departamento.ID}, {departamento.nombre}, {departamento.telefono}"
+	output = f"{departamento.id}, {departamento.nombre}, {departamento.telefono}"
 	return HttpResponse(output)
 
 #devuelve los empleados de un departamento
