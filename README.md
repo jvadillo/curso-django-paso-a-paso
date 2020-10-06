@@ -146,22 +146,22 @@ def index(request):
     
 Abrir (o crear) el fichero `urls.py` y añadir el patrón para la siguiente ruta:
    ```python
-    from django.urls import path
-    from . import views
+from django.urls import path
+from . import views
    
-    urlpatterns = [
-        path('', views.index, name='index'),
-    ]
+urlpatterns = [
+    path('', views.index, name='index'),
+]
    ```
-Dentro del directorio del proyecto, editar `urls.py` para incluir la redirección al fichero `urls.py` de la aplicación. El resultado debe ser el siguiente:
+Dentro del directorio del proyecto, editar `urls.py` para incluir la redirección al fichero `urls.py` de la aplicación. El resultado debe ser el siguiente (no olvides importar la librería `include` de `django.urls`):
    ```python
-   from django.contrib import admin
-   from django.urls import include, path
+from django.contrib import admin
+from django.urls import include, path
   
-   urlpatterns = [
-       path('appEmpresaDjango/', include('appEmpresaDjango.urls')),
-       path('admin/', admin.site.urls),
-   ]
+urlpatterns = [
+    path('appEmpresaDjango/', include('appEmpresaDjango.urls')),
+    path('admin/', admin.site.urls),
+]
    ```
 
 De este modo tenemos un `urls.py` en cada directorio de nuestras aplicaciones gestionados desde el `urls.py` del directorio del proyecto.
