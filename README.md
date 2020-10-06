@@ -283,7 +283,7 @@ admin.site.register(Empleado)
 Iniciar el servidor y entrar
     
    ```
-    python manage.py runserver
+python manage.py runserver
    ```
     
 Entrar en la aplicación [http://127.0.0.1:8000/admin](http://127.0.0.1:8000/admin) y añadir algunas entradas en cada entidad para tener un juego de ensayo que luego se pueda ver desde la aplicación [http://127.0.0.1:8000/appEmpresaDjango](http://127.0.0.1:8000/appEmpresaDjango)
@@ -327,13 +327,13 @@ def empleados(request, departamento_id):
 #devuelve los detalles de un empleado
 def empleado(request, empleado_id):
 	empleado = Empleado.objects.get(pk=empleado_id)
-	output = ', '.join([str(empleado.id), empleado.nombre, str(empleado.fecha_nacimiento), str(empleado.antiguedad), str(empleado.departamento), h.nombre for h in empleado.habilidades.all()])
+	output = ', '.join([str(empleado.id), empleado.nombre, str(empleado.fecha_nacimiento), str(empleado.antiguedad), str(empleado.departamento), str([h.nombre for h in empleado.habilidades.all()])])
 	return HttpResponse(output)
 
 #devuelve los detalles de una habilidad
 def habilidad(request, habilidad_id):
 	habilidad = Habilidad.objects.get(pk=habilidad_id)
-	output = ', '.join([str(habilidad.id), habilidad.nombre, e.nombre for e in habilidad.empleado_set.all()])
+	output = ', '.join([str(habilidad.id), habilidad.nombre, str([e.nombre for e in habilidad.empleado_set.all()])])
 	return HttpResponse(output)
 ```
 
