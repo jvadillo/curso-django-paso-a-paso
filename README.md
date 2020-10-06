@@ -273,11 +273,11 @@ La aplicación de administración permite visualizar la información de nuestros
 Editar el fichero `admin.py` para registrar las clases de nuestro modelo y que se puedan ver en la aplicación de administración por defecto que trae Django:
     
    ```
-    from django.contrib import admin
-	from .models import Departamento, Habilidad, Empleado
-	admin.site.register(Departamento)
-	admin.site.register(Habilidad)
-	admin.site.register(Empleado)
+from django.contrib import admin
+from .models import Departamento, Habilidad, Empleado
+admin.site.register(Departamento)
+admin.site.register(Habilidad)
+admin.site.register(Empleado)
    ```
 
 Iniciar el servidor y entrar
