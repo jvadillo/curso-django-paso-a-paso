@@ -59,11 +59,17 @@ El primer paso será crear un entorno virtual y así disponer de un entorno aisl
     
       mkvirtualenv empresaDjangoEnv
 
- Activar el entorno
+ Activar el entorno (se activa automáticamente al crearlo)
     
       workon empresaDjangoEnv
     
     
+Podemos saber si estamos dentro de un entorno virtual porque la consola nos pondrá en toto momento el nombre del entorno en el que nos encontramos entre paréntesis. En este caso:
+
+´´´
+(empresaDjangoEnv) C:\Users\developer>
+´´´
+
 Instalar Django
 
       pip install django
