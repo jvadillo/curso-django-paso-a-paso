@@ -70,9 +70,19 @@ Podemos saber si estamos dentro de un entorno virtual porque la consola nos pond
 	(empresaDjangoEnv) C:\Users\developer>
 
 
-Instalar Django
+Recuerda que podemos saber las dependencias que tenemos instaladas en un entorno virtual ejecutando el comando `pip freeze`. Si lo hacemos ahora, no mostrará nada ya que acabamos de crear el entorno.
+
+Por lo tanto, ahora toca instalar Django:
 
       pip install django
+
+Si ejecutas el comando `pip freeze` una vez instalado Django, verás cómo muestra varias dependecias que ha instalado (aparecerá Django y otras dependencias que Django necesita):
+
+	(empresaDjangoEnv) C:\Users\developer>pip freeze
+	asgiref==3.5.0
+	Django==4.0.3
+	sqlparse==0.4.2
+	tzdata==2022.1
 
 Si tienes dudas sobre el uso de virtualenvwrapper y su configuración en PyCharm o Visual Studio Code, [puedes ver este video](https://youtu.be/lJrs7P9eKXc) donde se explica todo lo que necesitas saber.
 
