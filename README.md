@@ -66,9 +66,9 @@ El primer paso será crear un entorno virtual y así disponer de un entorno aisl
     
 Podemos saber si estamos dentro de un entorno virtual porque la consola nos pondrá en toto momento el nombre del entorno en el que nos encontramos entre paréntesis. En este caso:
 
-´´´
-(empresaDjangoEnv) C:\Users\developer>
-´´´
+
+	(empresaDjangoEnv) C:\Users\developer>
+
 
 Instalar Django
 
