@@ -204,9 +204,10 @@ class Habilidad(models.Model):
 	nombre = models.CharField(max_length=50)
     
 class Empleado(models.Model):
-	# Campo para la relación one-to-many
-	departamento = models.ForeignKey(Departamento, on_delete=models.CASCADE)
-	habilidades = models.ManyToManyField(Habilidad)
+	# Campo para la relación one-to-many (un empleado pertenece a un departamento)
+    	departamento = models.ForeignKey(Departamento, on_delete=models.CASCADE)
+    	# Campo para la relación many-to-many (un empleado tiene varias habilidades)
+    	habilidades = models.ManyToManyField(Habilidad)
 	nombre = models.CharField(max_length=40)
 	fecha_nacimiento = models.DateField()
 	# Es posible indicar un valor por defecto mediante 'default'
