@@ -55,13 +55,13 @@ Recuerda que como pre-requisito tienes que tener **Python, PIP y virtualenvwrapp
 
 ### PASO 1: Instala Django en un entorno virtual 
 
-Crear el entorno virtual
+El primer paso será crear un entorno virtual y así disponer de un entorno aislado donde instalar nuestras dependencias (por ejemplo, Django) sin que nos afecten otras que tengamos instaladas en nuestro sistema. Para crear el entorno virtual:
     
-      mkvirtualenv empresaDjango
+      mkvirtualenv empresaDjangoEnv
 
  Activar el entorno
     
-      workon empresaDjango
+      workon empresaDjangoEnv
     
     
 Instalar Django
