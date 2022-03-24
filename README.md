@@ -160,7 +160,7 @@ def index(request):
     return HttpResponse("Listado de departamentos")
 ```
     
-Abrir (o crear) el fichero `urls.py` y añadir el patrón para la siguiente ruta:
+Crear el archivo `urls.py` dentro de la carpeta de la aplicación y añadir el patrón para la siguiente ruta:
    ```python
 from django.urls import path
 from . import views
@@ -169,7 +169,10 @@ urlpatterns = [
     path('', views.index, name='index'),
 ]
    ```
-Dentro del directorio del proyecto, editar `urls.py` para incluir la redirección al fichero `urls.py` de la aplicación. El resultado debe ser el siguiente (no olvides importar la librería `include` de `django.urls`):
+Con esto le estaremos diciendo que la función `index()` recién creada será la encargada de responder a las llamadas a esa ruta.
+
+Como Django nos permite tener múltiples aplicaciones dentro de un proyecto, vamos a decirle qué ruta seguirán las llamadas a la aplicación `appEmpresaDjango`. Para ello, dentro del directorio del proyecto hay que editar el archivo `urls.py` e incluir la redirección al fichero `urls.py` de la aplicación `appEmpresaDjango`. El resultado debe ser el siguiente (no olvides importar la librería `include` de `django.urls`):
+
    ```python
 from django.contrib import admin
 from django.urls import include, path
@@ -180,7 +183,9 @@ urlpatterns = [
 ]
    ```
 
-De este modo tenemos un `urls.py` en cada directorio de nuestras aplicaciones gestionados desde el `urls.py` del directorio del proyecto.
+En resumen, la idea es que cada aplicación gestiones sus rutas con su propio `urls.py` y en el `urls.py` del proyecto simplemente enlazarlos. En el ejemplo anterior, todas las rutas que vayan a `/appEmpresaDjango` se gestionarán desde el urls.py que hemos creado.
+
+Para comprobar que la vista funciona perfectamente, prueba a iniciar el servidor y acceder a la ruta: http://127.0.0.1:8000/appEmpresaDjango/
 
 ### PASO 5: Crea el modelo de nuestra aplicación
 
