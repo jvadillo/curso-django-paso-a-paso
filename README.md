@@ -317,45 +317,45 @@ Creamos las vistas correspondientes a las siguientes URLs:
 | URL | Descripción de la vista |
 | -- | -- |
 | /appEmpresaDjango  | Muestra todos los departamentos  |
-| /appEmpresaDjango/departamento/<:id>  | Muestra los detalles de un departamento a partir del ID indicado  |
-| /appEmpresaDjango/departamento/<:id>/empleados  | Muestra los empleados del departamento con el ID indicado  |
-| /appEmpresaDjango/empleado/<:id>  | Muestra los detalles del empleado con el ID indicado  |
-| /appEmpresaDjango/habilidad/<:id>  | Muestra los detalles de la habilidad con el ID indicado  |
+| /appEmpresaDjango/departamentos/<:id>  | Muestra los detalles de un departamento a partir del ID indicado  |
+| /appEmpresaDjango/departamentos/<:id>/empleados  | Muestra los empleados del departamento con el ID indicado  |
+| /appEmpresaDjango/empleados/<:id>  | Muestra los detalles del empleado con el ID indicado  |
+| /appEmpresaDjango/habilidades/<:id>  | Muestra los detalles de la habilidad con el ID indicado  |
 
 Creamos las vistas (cada vista estará definida por una función):
 ```python
-from django.http import HttpResponse, Http404
-from django.shortcuts import get_object_or_404, get_list_or_404
+from django.http import HttpResponse
 from .models import Departamento, Habilidad, Empleado
 
-#devuelve el listado de empresas
-def index(request):
+
+#devuelve el listado de departamentos
+def index_departamentos(request):
 	departamentos = Departamento.objects.order_by('nombre')
 	output = ', '.join([d.nombre for d in departamentos])
 	return HttpResponse(output)
 
 #devuelve los datos de un departamento
-def detail(request, departamento_id):
+def show_departamento(request, departamento_id):
 	departamento = Departamento.objects.get(pk=departamento_id)
-	output = ', '.join([str(departamento.id), departamento.nombre, str(departamento.telefono)])
+	output = f'Detalles del departamento: {departamento.id}, {departamento.nombre}, {departamento.telefono}'
 	return HttpResponse(output)
 
 #devuelve los empleados de un departamento
-def empleados(request, departamento_id):
+def index_empleados(request, departamento_id):
 	departamento = Departamento.objects.get(pk=departamento_id)
 	output = ', '.join([e.nombre for e in departamento.empleado_set.all()])
 	return HttpResponse(output)
 
 #devuelve los detalles de un empleado
-def empleado(request, empleado_id):
+def show_empleado(request, empleado_id):
 	empleado = Empleado.objects.get(pk=empleado_id)
-	output = ', '.join([str(empleado.id), empleado.nombre, str(empleado.fecha_nacimiento), str(empleado.antiguedad), str(empleado.departamento), str([h.nombre for h in empleado.habilidades.all()])])
+	output = f'Detalles del empleado: {empleado.id}, {empleado.nombre}, {empleado.fecha_nacimiento}, {empleado.antiguedad}, {str(empleado.departamento)}. Habilidades: {[h.nombre for h in empleado.habilidades.all()]}'
 	return HttpResponse(output)
 
 #devuelve los detalles de una habilidad
-def habilidad(request, habilidad_id):
+def show_habilidad(request, habilidad_id):
 	habilidad = Habilidad.objects.get(pk=habilidad_id)
-	output = ', '.join([str(habilidad.id), habilidad.nombre, str([e.nombre for e in habilidad.empleado_set.all()])])
+	output = f'Detalles de la habilidad: {habilidad.id}, {habilidad.nombre}. Empleados: {[e.nombre for e in habilidad.empleado_set.all()]}'
 	return HttpResponse(output)
 ```
 
