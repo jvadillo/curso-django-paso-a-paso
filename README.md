@@ -221,7 +221,7 @@ python manage.py makemigrations appEmpresaDjango
 python manage.py migrate   
    ```
 
-### PASO 6: Añade y consulta registros desde la API de Django
+#### Añade y consulta registros desde la API de Django
 
 Accede al intérprete interactivo de Django escribiendo el siguiente comando:
 
@@ -283,7 +283,7 @@ def __str__(self):
         return self.nombre
 ```
 
-### PASO 7: Utiliza la aplicación de Administración de Django para visualizar y añadir registros
+### PASO 6: Utiliza la aplicación de Administración de Django para visualizar y añadir registros
 
 La aplicación de administración permite visualizar la información de nuestros modelos de forma sencilla. Crear un usuario "adminDjango" (contraseña: "adminDjango") para la aplicación de administración:
     
@@ -310,7 +310,7 @@ python manage.py runserver
     
 Entrar en la aplicación [http://127.0.0.1:8000/admin](http://127.0.0.1:8000/admin) y añadir algunas entradas en cada entidad para tener un juego de ensayo que luego se pueda ver desde la aplicación [http://127.0.0.1:8000/appEmpresaDjango](http://127.0.0.1:8000/appEmpresaDjango)
 
-### PASO 8: Crea las vistas y urls para interactuar con el modelo
+### PASO 7: Crea las vistas y urls para interactuar con el modelo
 
 Creamos las vistas correspondientes a las siguientes URLs:
 
@@ -375,7 +375,7 @@ urlpatterns = [
 
 Cuando hacemos referencia por ejemplo a `views.index`, está refiriéndose al método `index()` de `views.py`.
 
-### PASO 9 (opcional): Mejora las vistas controlando errores 404
+#### Opcional: mejora las vistas controlando errores 404
 
 Utiliza el método `get_object_or_404` para controlar los casos en los que el registro de la petición no exista:
 
@@ -417,7 +417,7 @@ def show_habilidad(request, habilidad_id):
 ```
 
 
-### PASO 10: Utiliza plantillas para mostrar la información
+### PASO 8: Utiliza plantillas para mostrar la información
 
 Actualiza las vistas creadas en `views.py`:
 
@@ -654,7 +654,7 @@ Plantilla habilidad.html:
 ```
 
 
-### PASO 11: La herencia en plantillas
+### PASO 9: La herencia en plantillas
 
 Como puedes ver en las plantillas anteriores, hay mucho código HTML que se repite en todas las páginas creadas (cabecera, footer, etc). Además, ¿qué ocurriría si queremos cambiar la etiqueta <title> de nuestras páginas? Tendríamos que hacer el cambio en todos los ficheros, lo cual no es nada cómodo y puede dar lugar a errores. Para evitar esto, Django permite crear una plantilla base que contenga el “esqueleto” con todos los elementos comunes y definir bloques que puedan ser sobreescritos por las plantillas que la hereden. 
 
