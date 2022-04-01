@@ -460,8 +460,230 @@ def show_habilidad(request, habilidad_id):
     return render(request, 'habilidad.html', context)
 ```
 
-Crea las plantillas (en una carpeta "templates" dentro del directorio de la aplicación) que definan la estructura de las páginas HTML resultantes :
+Crea las plantillas (en una carpeta "templates" dentro del directorio de la aplicación) que definan la estructura de las páginas HTML resultantes:
 
+Plantilla index.html:
+
+```python
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="style.css">
+        <title>Listado de departamentos</title>
+    </head>
+    <body>
+        <div id="content">
+	     <h1>Gestor de Empleados</h1>
+         <h2>Listado de departamentos</h2>
+         {% if lista_departamentos %}
+             <ul>
+             {% for d in lista_departamentos %}
+                 <li>
+                     <a href="/appEmpresaDjango/departamentos/{{ d.id }}">{{ d.nombre}}</a>
+                 </li>
+             {% endfor %}
+             </ul>
+         {% else %}
+         <p>No hay departamentos creados.</p>
+         {% endif %}
+        </div>
+    </body>
+</html>
+```
+Plantilla detail.html:
+
+```python
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="style.css">
+    <title>Detalle del departamento</title>
+</head>
+
+<body>
+    <div id="content">
+        <h1>Gestor de Empleados</h1>
+        <h2>Datos del departamento</h2>
+        {% if departamento %}
+            <ul>
+                <li>
+                    {{ departamento.nombre}}
+                </li>
+                <li>
+                    {{ departamento.telefono}}
+                </li>
+                <li>
+                    <a href="/appEmpresaDjango/departamentos/{{ departamento.id }}/empleados">Ver empleados</a>
+                </li>
+            </ul>
+        {% else %}
+            <p>No existe este departamento.</p>
+        {% endif %}
+    </div>
+</body>
+
+</html>
+```
+
+Plantilla empleados.html:
+
+```python
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="style.css">
+    <title>Empleados del departamento</title>
+</head>
+
+<body>
+    <div id="content">
+        <h1>Gestor de Empleados</h1>
+        <h2>Lista de empleados</h2>
+        <h3>{{ departamento.nombre }}</h3>
+        {% if empleados %}
+            <ul>
+                {% for e in empleados %}
+                <li>
+                    <a href="/appEmpresaDjango/empleados/{{ e.id }}">{{ e.nombre}}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No hay empleados creados.</p>
+        {% endif %}
+    </div>
+</body>
+
+</html>
+```
+
+Plantilla empleado.html:
+
+```python
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="style.css">
+    <title>Detalles del empleado</title>
+</head>
+
+<body>
+    <div id="content">
+        <h1>Gestor de Empleados</h1>
+        <h2>Datos del empleado</h2>
+
+        {% if empleado %}
+            <ul>
+                <li>
+                    {{ empleado.nombre}}
+                </li>
+                <li>
+                    {{ empleado.fecha_nacimiento}}
+                </li>
+                <li>
+                    {{ empleado.antiguedad}}
+                </li>
+                <li>
+                    <a href="/appEmpresaDjango/departamentos/{{ empleado.departamento.id }}">{{ empleado.departamento}}</a>
+                </li>
+            </ul>
+            <h3>Lista de habilidades</h3>
+            {% if habilidades %}
+                <ol>
+                    {% for h in habilidades %}
+                        <li>
+                            <a href="/appEmpresaDjango/habilidades/{{ h.id }}">{{ h.nombre}}</a>
+                        </li>
+                    {% endfor %}
+                </ol>
+            {% else %}
+                <p>No tiene habilidades asociadas.</p>
+            {% endif %}
+        {% else %}
+            <p>No existe este empleado.</p>
+        {% endif %}
+    </div>
+</body>
+
+</html>
+```
+
+Plantilla habilidad.html:
+
+```python
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="style.css">
+    <title>Detalles de la habilidad</title>
+</head>
+
+<body>
+    <div id="content">
+        <h1>Gestor de Empleados</h1>
+
+        <h2>Datos de la habilidad</h2>
+
+        {% if habilidad %}
+            <h3>{{ habilidad.nombre}}</h3>
+            <h3>Lista de empleados</h3>
+            
+            {% if empleados %}
+            <ol>
+                {% for e in empleados %}
+                    <li>
+                        <a href="/appEmpresaDjango/empleados/{{ e.id }}">{{ e.nombre}}</a>
+                    </li>
+                {% endfor %}
+            </ol>
+            {% else %}
+                <p>No tiene empleados asociados.</p>
+            {% endif %}
+        {% else %}
+            <p>No existe esta habilidad.</p>
+        {% endif %}
+
+    </div>
+</body>
+
+</html>
+```
+
+
+### PASO 11: La herencia en plantillas
+
+Como puedes ver en las plantillas anteriores, hay mucho código HTML que se repite en todas las páginas creadas (cabecera, footer, etc). Además, ¿qué ocurriría si queremos cambiar la etiqueta <title> de nuestras páginas? Tendríamos que hacer el cambio en todos los ficheros, lo cual no es nada cómodo y puede dar lugar a errores. Para evitar esto, Django permite crear una plantilla base que contenga el “esqueleto” con todos los elementos comunes y definir bloques que puedan ser sobreescritos por las plantillas que la hereden. 
+
+Crea una plantilla "base.html" que contenga toda la estructura común:
+```html
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="style.css">
+        <title>{% block titulo %}Gestor de Empleados{% endblock %}</title>
+    </head>
+    <body>
+        <div id="content">
+	     <h1>Gestor de Empleados</h1>
+            {% block contenido %}{% endblock %}
+        </div>
+    </body>
+</html>
+```
+
+
+Las plantillas específicas que heredan de la plantilla base, deberán llevar una única directiva "extends" para indicar que van a heredar automáticamente el código de la plantilla base:
+
+```python
+#index.html:
+{% extends "base.html" %}
+```
+Ahora cada plantilla simplemente tendrá que definir el contenido que quiere incluir dentro de los bloques indicados en la plantilla base (los que están definidos con las directivas `{% block %}` y `{% endblock %}`:
+	
 Plantilla index.html:
 
 ```python
@@ -609,36 +831,7 @@ Plantilla habilidad.html:
 
 {% endblock %}
 ```
-
-### PASO 11: La herencia en plantillas
-
-Django permite crear una plantilla base que contenga el “esqueleto” con todos los elementos comunes y definir bloques que puedan sobreescritos por las plantillas que la hereden. 
-
-Crea una plantilla "base.html":
-```html
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <link rel="stylesheet" href="style.css">
-        <title>{% block titulo %}Gestor de Empleados{% endblock %}</title>
-    </head>
-    <body>
-        <div id="content">
-	     <h1>Gestor de Empleados</h1>
-            {% block contenido %}{% endblock %}
-        </div>
-    </body>
-</html>
-```
-
-
-Las plantillas específicas que heredan de la plantilla base, como ya pusimos en las vistas anteriores, deben llevar una única directiva "extends":
-
-```python
-#index.html:
-{% extends "base.html" %}
-```
-
+	
 ### PASO 12: Actualizar las URLs
 
 En lugar de utilizar la ruta de la URL, podemos utilizar el nombre que le hemos dado en el mapeo definido en `urls.py`
