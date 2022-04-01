@@ -475,7 +475,7 @@ Plantilla index.html:
 	<ul>
 	{% for d in lista_departamentos %}
 		<li>
-		    <a href="/appEmpresaDjango/departamento/{{ d.id }}">{{ d.nombre}}</a>
+		    <a href="/appEmpresaDjango/departamentos/{{ d.id }}">{{ d.nombre}}</a>
 		</li>
 	{% endfor %}
 	</ul>
@@ -503,7 +503,7 @@ Plantilla detail.html:
             {{ departamento.telefono}}
         </li>
         <li>
-            <a href="/appEmpresaDjango/departamento/{{ departamento.id }}/empleados">Ver empleados</a>
+            <a href="/appEmpresaDjango/departamentos/{{ departamento.id }}/empleados">Ver empleados</a>
         </li>
     </ul>
 {% else %}
@@ -527,7 +527,7 @@ Plantilla empleados.html:
 	<ul>
 	{% for e in empleados %}
 		<li>
-		    <a href="/appEmpresaDjango/empleado/{{ e.id }}">{{ e.nombre}}</a>
+		    <a href="/appEmpresaDjango/empleados/{{ e.id }}">{{ e.nombre}}</a>
 		</li>
 	{% endfor %}
 	</ul>
@@ -560,14 +560,14 @@ Plantilla empleado.html:
             {{ empleado.antiguedad}}
         </li>
         <li>
-            <a href="/appEmpresaDjango/departamento/{{ empleado.departamento.id }}">{{ empleado.departamento}}</a>
+            <a href="/appEmpresaDjango/departamentos/{{ empleado.departamento.id }}">{{ empleado.departamento}}</a>
         </li>
     </ul>
 	<h3>Lista de habilidades</h3>
 	{% if habilidades %}
 		<ol>
 		{% for h in habilidades %}
-			<li><a href="/appEmpresaDjango/habilidad/{{ h.id }}">{{ h.nombre}}</a></li>
+			<li><a href="/appEmpresaDjango/habilidades/{{ h.id }}">{{ h.nombre}}</a></li>
 		{% endfor %}
 		</ol>
 	{% else %}
@@ -597,7 +597,7 @@ Plantilla habilidad.html:
 	{% if empleados %}
 		<ol>
 		{% for e in empleados %}
-			<li><a href="/appEmpresaDjango/empleado/{{ e.id }}">{{ e.nombre}}</a></li>
+			<li><a href="/appEmpresaDjango/empleados/{{ e.id }}">{{ e.nombre}}</a></li>
 		{% endfor %}
 		</ol>
 	{% else %}
