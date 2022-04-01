@@ -832,7 +832,7 @@ Plantilla habilidad.html:
 {% endblock %}
 ```
 	
-### PASO 12: Actualizar las URLs
+#### Opcional: Actualizar las URLs
 
 En lugar de utilizar la ruta de la URL, podemos utilizar el nombre que le hemos dado en el mapeo definido en `urls.py`
 
@@ -848,6 +848,36 @@ Cambia también el resto de URLs en las vistas correspondientes.
 
 Entrar en la aplicación [http://127.0.0.1:8000/appEmpresaDjango/](http://127.0.0.1:8000/appEmpresaDjango/)
 
+### PASO 10: Incluir archivos estáticos	
+	
+Incluir archivos estáticos (CSS, imágenes, etc.) es muy sencillo en Django. Sigue los siguientes pasos para incluir un archivo .css llamado `estilos.css`:
+
+En primer lugar crea un directorio llamado `static` dentro de la carpeta de tu aplicación. Será el directorio encargado de contener los archivos estáticos. Como en esta ocasión se trata de un archivo CSS, crearemos dentro una carpeta llamada CSS para así mantener nuestros ficheros organizados. Dentro crearemos un nuevo archivo llamado `estilos.css` con el siguiente contenido:
+	
+```css
+h1 {
+    color: blue;
+}	
+```
+Nos servirá para comprobar que todo ha ido bien. A continuación, entra en el archivo `settings.py` de tu proyecto y añade la siguiente información para especificar dónde se ubican nuestros archivos estáticos:
+	
+```
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+```
+	
+Hazlo justo debajo de `STATIC_URL = 'static/'`, es decir, como resultado quedará así:
+
+```
+STATIC_URL = 'static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+```
+	
+Ahora ya podremos incluir nuestro CSS en cualquier plantilla .html. Para ello debemos incluir en la primera línea la directiva `{% load static %}` y a la hora de referenciar el archivo CSS hacerlo de la siguiente forma:
+
+```
+<link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+```
+	
 ## Contribuir
 Toda contribución es más que bienvenida. Puedes contribuir con este libro de las siguientes:
 - Ayuda a mejorar el material notificando errores, planteando mejoras o incluso nuevos ejercicios prácticos.
