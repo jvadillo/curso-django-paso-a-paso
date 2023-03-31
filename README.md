@@ -120,14 +120,14 @@ La estructura de ficheros resultante es la siguiente:
     
     ```
     
-Entra dentro de la carpeta del proyecto (`cd empresaDjango`) y ahora inicia el servidor con el comando `python manage.py runserver`.
+Entra dentro de la carpeta del proyecto (`cd empresaDjango`) y ahora inicia el servidor con el comando `py manage.py runserver`.
+Puedes comprobar que puedes acceder correctamente abriendo desde el navegador la página que te indica: http://127.0.0.1:8000/
 
 ### PASO 3: Crea tu primera aplicación
-Posicionate en el directorio del proyecto `$ cd <project_folder>`
 
-Crea la aplicación ejecutando el siguiente comando:
+Estando dentro del directorio del proyecto, crea la aplicación llamada `appEmpresaDjango` ejecutando el siguiente comando:
 
-`python manage.py startapp appEmpresaDjango`
+`py manage.py startapp appEmpresaDjango`
 
 Dentro del directorio de la aplicación, crear un fichero llamado `urls.py` que utilizaremos para mapear las URLs de nuestra aplicación.
 
