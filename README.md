@@ -53,9 +53,13 @@ En este repositorio puedes encontrar todas las presentaciones para ir aprendiend
 Tan solo necesitas seguir  los pasos descritos en esta sección para lograr desarrollar tu primera aplicación web con Django. 
 Recuerda que como pre-requisito tienes que tener **Python, PIP y virtualenvwrapper** instalado en el sistema. ¡Happy Coding!
 
-### PASO 1: Instala Django en un entorno virtual 
+### PASO 1: Instala Django
 
-El primer paso será crear un entorno virtual y así disponer de un entorno aislado donde instalar nuestras dependencias (por ejemplo, Django) sin que nos afecten otras que tengamos instaladas en nuestro sistema. Para crear el entorno virtual:
+#### Entorno virtual
+
+Para el desarrollo en local de proyectos con Python **es recomendable aislar las dependencias de nuestros proyectos mediante entornos virtuales**. Este es un paso opcional, por lo que si acabas de iniciarte en Python puedes saltártelo y una vez tengas algo más de soltura podrás pasar al manejo de entornos virtuales.
+
+Si te decides por utilizar entornos virtuales, el primer paso será crear uno y así disponer de un entorno aislado donde instalar nuestras dependencias (por ejemplo, Django) sin que nos afecten otras que tengamos instaladas en nuestro sistema. Para crear el entorno virtual:
     
       mkvirtualenv empresaDjangoEnv
 
@@ -69,14 +73,16 @@ Podemos saber si estamos dentro de un entorno virtual porque la consola nos pond
 
 	(empresaDjangoEnv) C:\Users\developer>
 
-
 Recuerda que podemos saber las dependencias que tenemos instaladas en un entorno virtual ejecutando el comando `pip freeze`. Si lo hacemos ahora, no mostrará nada ya que acabamos de crear el entorno.
 
-Por lo tanto, ahora toca instalar Django:
+#### Instalación de Django
 
-      pip install django
+Recuerda que en este curso asumimos que tienes [Python](https://www.python.org/downloads/) y el gestor de paquetes [PIP](https://pip.pypa.io/en/latest/installation/) instalado en tu sistema. Para instalar Django ejecuta el siguiente comando:
 
-Si ejecutas el comando `pip freeze` una vez instalado Django, verás cómo muestra varias dependecias que ha instalado (aparecerá Django y otras dependencias que Django necesita):
+- Windows: `py -m pip install Django`
+- Linux/MAC: `python -m pip install Django`
+
+Si ejecutas el comando `py -m pip freeze` una vez instalado Django, verás cómo muestra varias dependecias que ha instalado (aparecerá Django y otras dependencias que Django necesita):
 
 	(empresaDjangoEnv) C:\Users\developer>pip freeze
 	asgiref==3.5.0
@@ -85,6 +91,10 @@ Si ejecutas el comando `pip freeze` una vez instalado Django, verás cómo muest
 	tzdata==2022.1
 
 Si tienes dudas sobre el uso de virtualenvwrapper y su configuración en PyCharm o Visual Studio Code, [puedes ver este video](https://youtu.be/lJrs7P9eKXc) donde se explica todo lo que necesitas saber.
+
+#### Diferencia entre `python` y `py`
+
+En Windows puedes utilizar tanto `python` como `py`. La diferencia está en que para utilizar `python` necesitas haber añadido a la variable de entorno `PATH` la versión de Python que quieres utilizar. Por el contrario, `py` es un launcher instalado normalmente en `C:\Windows` que permite indicar la versión de Python a utilizar (por defecto utilizará la más actual que encuentre instalada en el sistema).
 
 
 ### PASO 2: Crea tu primer proyecto
