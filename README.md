@@ -282,6 +282,9 @@ Una vez dentro, ya puedes comenzar a crear y consultar registros.
 	>>> empleado.departamento.nombre
 	'Oficina Tecnica'
 	
+	# Podemos conseguir un empleado por su primary key:
+	empleado = Empleado.objects.get(pk=1)
+	
 	# También es posible acceder desde el padre a todos sus hijos.
 	>>> departamento.empleado_set.all()
 	<QuerySet [<Empleado: Empleado object (1)>, <Empleado: Empleado object (2)>, <Empleado: Empleado object (3)>]>
