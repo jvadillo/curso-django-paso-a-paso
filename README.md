@@ -122,6 +122,7 @@ La estructura de ficheros resultante es la siguiente:
     
 Entra dentro de la carpeta del proyecto (`cd empresaDjango`) y ahora inicia el servidor con el comando `py manage.py runserver`.
 Puedes comprobar que puedes acceder correctamente abriendo desde el navegador la página que te indica: http://127.0.0.1:8000/
+
 Para cerrar el servidor pulsa las teclas CTRL+C.
 
 ### PASO 3: Crea tu primera aplicación
