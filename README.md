@@ -206,7 +206,7 @@ Para comprobar que la vista funciona perfectamente, prueba a iniciar el servidor
 
 Editar el fichero `models.py` de la aplicación creando las clases Departamento, Habilidad y Empleado:
 
-   ```python
+```python
 from django.db import models
  
 class Departamento(models.Model):
@@ -228,13 +228,14 @@ class Empleado(models.Model):
     # Es posible indicar un valor por defecto mediante 'default'
     antiguedad = models.IntegerField(default=0)
     # Para permitir propiedades con valor null, añadiremos las opciones null=True, blank=True.       	
-```    
+```
+
 Aplica los cambios realizados en el modelo mediante los siguientes comandos:
     
-   ```
+```
 python manage.py makemigrations appEmpresaDjango
-python manage.py migrate   
-   ```
+python manage.py migrate
+```
 
 #### Añade y consulta registros desde la API de Django
 
