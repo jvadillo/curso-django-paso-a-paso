@@ -306,26 +306,26 @@ def __str__(self):
 
 La aplicación de administración permite visualizar la información de nuestros modelos de forma sencilla. Crear un usuario "adminDjango" (contraseña: "adminDjango") para la aplicación de administración:
     
-    ```
+```
      python manage.py createsuperuser
     
-    ```
+```
     
 Editar el fichero `admin.py` para registrar las clases de nuestro modelo y que se puedan ver en la aplicación de administración por defecto que trae Django:
     
-   ```
+```
 from django.contrib import admin
 from .models import Departamento, Habilidad, Empleado
 admin.site.register(Departamento)
 admin.site.register(Habilidad)
 admin.site.register(Empleado)
-   ```
+```
 
 Iniciar el servidor y entrar
     
-   ```
-python manage.py runserver
-   ```
+```
+py manage.py runserver
+```
     
 Entrar en la aplicación [http://127.0.0.1:8000/admin](http://127.0.0.1:8000/admin) y añadir algunas entradas en cada entidad para tener un juego de ensayo que luego se pueda ver desde la aplicación [http://127.0.0.1:8000/appEmpresaDjango](http://127.0.0.1:8000/appEmpresaDjango)
 
