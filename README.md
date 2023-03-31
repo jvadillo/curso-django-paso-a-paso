@@ -99,15 +99,18 @@ En Windows puedes utilizar tanto `python` como `py`. La diferencia está en que 
 
 ### PASO 2: Crea tu primer proyecto
 
-Crea el proyecto Django:
+Crea el proyecto Django llamado `empresaDjango`:
 
       django-admin startproject empresaDjango
     
-    
-   La estructura de ficheros resultante es la siguiente:
+En caso de que el anterior comando te dé error en Windows, utiliza el comando alternativo: 
+
+	py -m django startproject empresaDjango
+
+La estructura de ficheros resultante es la siguiente:
     
     ```
-     project/
+     empresaDjango/
          manage.py
          project/
      	__init__.py
@@ -117,7 +120,7 @@ Crea el proyecto Django:
     
     ```
     
-   Inicia el servidor con el comando `python manage.py runserver` dentro del directorio del proyecto.
+Entra dentro de la carpeta del proyecto (`cd empresaDjango`) y ahora inicia el servidor con el comando `python manage.py runserver`.
 
 ### PASO 3: Crea tu primera aplicación
 Posicionate en el directorio del proyecto `$ cd <project_folder>`
