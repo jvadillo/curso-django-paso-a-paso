@@ -107,6 +107,10 @@ En caso de que el anterior comando te dé error en Windows, utiliza el comando a
 
 	py -m django startproject empresaDjango
 
+o el comando:
+
+	python -m django startproject empresaDjango
+
 La estructura de ficheros resultante es la siguiente:
     
     ```
@@ -131,6 +135,10 @@ Estando dentro del directorio del proyecto, crea la aplicación llamada `appEmpr
 
 `py manage.py startapp appEmpresaDjango`
 
+En caso de que tengas algún problema para ejecutarlo, prueba con el siguiente comando:
+
+`py -m django startapp appEmpresaDjango`
+
 Dentro del directorio de la aplicación, crear un fichero llamado `urls.py` que utilizaremos para mapear las URLs de nuestra aplicación.
 
 La estructura de ficheros resultante será la siguiente:
@@ -138,7 +146,6 @@ La estructura de ficheros resultante será la siguiente:
 ```
  project/
      manage.py
-     db.sqlite3
      project/
  	__init__.py
  	settings.py
