@@ -273,7 +273,12 @@ Una vez dentro, ya puedes comenzar a crear y consultar registros.
 	>>> departamento.empleado_set.all()
 	<QuerySet []>
 	
-	# Crear empleados.
+	# Crear un empleado, indicando el departamento.
+	>>> empleado = Empleado(departamento=departamento, nombre="Markel Ugalde", fecha_nacimiento='1988-06-12', antiguedad="12")
+	>>> departamento.save()
+	
+	
+	# Opción alternativa para crear empleados a partir del departamento:
 	>>> departamento.empleado_set.create(nombre='Mikel Uriarte', fecha_nacimiento='1985-01-23')
 	<Empleado: Empleado object (1)>
 	
