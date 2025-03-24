@@ -5,7 +5,7 @@ Este es un curso diseñado para aprender desarrollar aplicaciones web con **Djan
 ## Conocimientos previos
 
 El curso requiere unos conocimientos básicos de **Python, HTML y CSS**.
-Del mismo modo partirá de la base de que tienes **Python, PIP y virtualenvwrapper** instalado en el sistema.
+Del mismo modo partirá de la base de que tienes **Python y PIP** instalados en el sistema.
 
 Puedes encontrar cursos y tutoriales sobre HTML, CSS y Python en [www.jonvadillo.com](http://jonvadillo.com)
 
@@ -51,7 +51,7 @@ En este repositorio puedes encontrar todas las presentaciones para ir aprendiend
 ## Hands on!
 
 Tan solo necesitas seguir  los pasos descritos en esta sección para lograr desarrollar tu primera aplicación web con Django. 
-Recuerda que como pre-requisito tienes que tener **Python, PIP y virtualenvwrapper** instalado en el sistema. ¡Happy Coding!
+Recuerda que como pre-requisito tienes que tener **Python y PIP** instalado en el sistema. ¡Happy Coding!
 
 ### PASO 1: Instala Django
 
@@ -59,19 +59,19 @@ Recuerda que como pre-requisito tienes que tener **Python, PIP y virtualenvwrapp
 
 Para el desarrollo en local de proyectos con Python **es recomendable aislar las dependencias de nuestros proyectos mediante entornos virtuales**. Este es un paso opcional, por lo que si acabas de iniciarte en Python puedes saltártelo y una vez tengas algo más de soltura podrás pasar al manejo de entornos virtuales.
 
-Si te decides por utilizar entornos virtuales, el primer paso será crear uno y así disponer de un entorno aislado donde instalar nuestras dependencias (por ejemplo, Django) sin que nos afecten otras que tengamos instaladas en nuestro sistema. Para crear el entorno virtual:
+Si te decides por utilizar entornos virtuales, el primer paso será crear uno y así disponer de un entorno aislado donde instalar nuestras dependencias (por ejemplo, Django) sin que nos afecten otras que tengamos instaladas en nuestro sistema. Para crear el entorno virtual en Windows, abre el CMD y ejecuta:
     
-      mkvirtualenv empresaDjangoEnv
+      python -m venv nombre_del_entorno
 
  Activar el entorno (se activa automáticamente al crearlo)
     
-      workon empresaDjangoEnv
+      nombre_del_entorno\Scripts\activate
     
     
 Podemos saber si estamos dentro de un entorno virtual porque la consola nos pondrá en toto momento el nombre del entorno en el que nos encontramos entre paréntesis. En este caso:
 
 
-	(empresaDjangoEnv) C:\Users\developer>
+	(nombre_del_entorno) C:\Users\developer>
 
 Recuerda que podemos saber las dependencias que tenemos instaladas en un entorno virtual ejecutando el comando `pip freeze`. Si lo hacemos ahora, no mostrará nada ya que acabamos de crear el entorno.
 
