@@ -209,7 +209,7 @@ Para comprobar que la vista funciona perfectamente, prueba a iniciar el servidor
 
 ### PASO 5: Crea el modelo de nuestra aplicación
 
-Editar el fichero `models.py` de la aplicación creando las clases Departamento, Habilidad y Empleado:
+Para consultar y manipular datos en la base de datos utilizaremos los modelos. Los modelos son clases de Python que le permiten a Django crear el esquema de base de datos con todas sus tablas y acceder a los objetos almacenados en ella.  Edita el fichero `models.py` de la aplicación creando las clases Departamento, Habilidad y Empleado:
 
 ```python
 from django.db import models
