@@ -84,11 +84,11 @@ Recuerda que en este curso asumimos que tienes [Python](https://www.python.org/d
 
 Si ejecutas el comando `py -m pip freeze` una vez instalado Django, verás cómo muestra varias dependecias que ha instalado (aparecerá Django y otras dependencias que Django necesita):
 
-	(empresaDjangoEnv) C:\Users\developer>pip freeze
-	asgiref==3.5.0
-	Django==4.0.3
-	sqlparse==0.4.2
-	tzdata==2022.1
+	(.env) C:\Users\developer>pip freeze
+	asgiref==3.8.1
+	Django==5.1.7
+	sqlparse==0.5.3
+	tzdata==2025.2
 
 Si en lugar de utilizar `venv` quieres utilizar virtualenvwapper pero tienes dudas respecto a su instalación y configuración en PyCharm o Visual Studio Code, [puedes ver este video](https://youtu.be/lJrs7P9eKXc) donde se explica todo lo que necesitas saber.
 
@@ -124,7 +124,7 @@ La estructura de ficheros resultante es la siguiente:
     
     ```
     
-Entra dentro de la carpeta del proyecto (`cd empresaDjango`) y ahora inicia el servidor con el comando `py manage.py runserver`.
+Como puedes ver, empresaDjango será el paquete que incluirá todo nuestro proyecto. Entra dentro de la carpeta del proyecto (`cd empresaDjango`) y ahora inicia el servidor con el comando `py manage.py runserver`.
 Puedes comprobar que puedes acceder correctamente abriendo desde el navegador la página que te indica: http://127.0.0.1:8000/
 
 Para cerrar el servidor pulsa las teclas CTRL+C.
@@ -138,8 +138,6 @@ Estando dentro del directorio del proyecto, crea la aplicación llamada `appEmpr
 En caso de que tengas algún problema para ejecutarlo, prueba con el siguiente comando:
 
 `py -m django startapp appEmpresaDjango`
-
-Dentro del directorio de la aplicación, crear un fichero llamado `urls.py` que utilizaremos para mapear las URLs de nuestra aplicación.
 
 La estructura de ficheros resultante será la siguiente:
 
@@ -182,7 +180,7 @@ def index(request):
     return HttpResponse("Listado de departamentos")
 ```
     
-Crear el archivo `urls.py` dentro de la carpeta de la aplicación y añadir el patrón para la siguiente ruta:
+Cada aplicación de Django necesitará un archivo `urls.py` para redirigir cada URL a la que intenta acceder el usuario con la función correspondiente de `views.py`. Crea el archivo `urls.py` dentro de la carpeta de la aplicación y añade el patrón para la siguiente ruta:
    ```python
 from django.urls import path
 from . import views
@@ -191,7 +189,7 @@ urlpatterns = [
     path('', views.index, name='index'),
 ]
    ```
-Con esto le estaremos diciendo que la función `index()` recién creada será la encargada de responder a las llamadas a esa ruta.
+Con esto le estaremos diciendo que la función `index()` recién creada será la encargada de responder a las llamadas a esa ruta (en este caso la ruta será '/').
 
 Como Django nos permite tener múltiples aplicaciones dentro de un proyecto, vamos a decirle qué ruta seguirán las llamadas a la aplicación `appEmpresaDjango`. Para ello, dentro del directorio del proyecto hay que editar el archivo `urls.py` e incluir la redirección al fichero `urls.py` de la aplicación `appEmpresaDjango`. El resultado debe ser el siguiente (no olvides importar la librería `include` de `django.urls`):
 
@@ -205,7 +203,7 @@ urlpatterns = [
 ]
    ```
 
-En resumen, la idea es que cada aplicación gestiones sus rutas con su propio `urls.py` y en el `urls.py` del proyecto simplemente enlazarlos. En el ejemplo anterior, todas las rutas que vayan a `/appEmpresaDjango` se gestionarán desde el urls.py que hemos creado.
+En resumen, la idea es que cada aplicación gestiones sus rutas con su propio `urls.py`, pero también tenemos que decirle al proyecto qué URLs gestionará cada aplicación (mediante su propio `urls.py`). En el ejemplo anterior, todas las rutas que vayan a `/appEmpresaDjango` se gestionarán desde el urls.py que hemos creado en la aplicación.
 
 Para comprobar que la vista funciona perfectamente, prueba a iniciar el servidor y acceder a la ruta: http://127.0.0.1:8000/appEmpresaDjango/
 
